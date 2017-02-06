@@ -11,10 +11,11 @@ public interface carInterface {
 	  Post-condition: if the car is on meter 499 or less it moves one meter forward.
 	  
 	  Test-cases:
-	 * @return 
+	 * @throws WrongInputException 
+	
 
 	*/
-	public Position moveForward();
+	public Position moveForward() throws NoSensorInputException, WrongInputException;
 	
 	/**
 
@@ -25,9 +26,10 @@ public interface carInterface {
 	  Post-condition: distance to target.
 	  
 	  Test-cases:
+	
 
 	*/
-	public int isEmpty() throws WrongInputException;
+	public int isEmpty() throws WrongInputException, NoSensorInputException;
 	
 	/**
 
@@ -52,9 +54,11 @@ public interface carInterface {
 	  Post-condition: boolean Parked.
 	  
 	  Test-cases:
+	 * @throws WrongInputException 
+	 * @throws NoSensorInputException 
 
 	*/
-	public void park();
+	public void park() throws NoSensorInputException, WrongInputException;
 	/**
 
 	  This method drives itself out of the currect parking spot out to the road.
