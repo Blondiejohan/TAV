@@ -4,10 +4,13 @@ public class Position {
 
 	private int location;
 	private int spaceCounter;
+	private boolean parked;
+	
 
-	public Position(int roadLocation, int spaceCounter) throws WrongInputException{
+	public Position(int roadLocation, int spaceCounter, boolean parked) throws WrongInputException{
 		setLocation(roadLocation);
 		setCounter(spaceCounter);
+		
 	}
 
 	public int getLocation() {
@@ -28,5 +31,13 @@ public class Position {
 
 	public void setCounter(int spaceCounter) {
 		this.spaceCounter = spaceCounter;
+	}
+
+	public boolean isParked() {
+		return parked;
+	}
+
+	public void setParked(boolean parked) {
+		this.parked = parked;
 	}
 }

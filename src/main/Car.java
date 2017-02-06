@@ -5,7 +5,6 @@ public class Car implements carInterface {
 
 	private int ultrasonicSensor1[];
 	private int ultrasonicSensor2[];
-	private boolean parked;
 	private int lastValueSensor1;
 	private int lastValueSensor2;
 	
@@ -14,8 +13,7 @@ public class Car implements carInterface {
 	public Car(int location, boolean parked, int[] ultrasonicSensor1, int[] ultrasonicSensor2) throws WrongInputException{
 		setUltrasonicSensor1(ultrasonicSensor1);
 		setUltrasonicSensor2(ultrasonicSensor2);
-		setParked(parked);
-		position = new Position(location,0);
+		position = new Position(location,0,parked);
 		
 	}
 
@@ -27,15 +25,6 @@ public class Car implements carInterface {
 	
 	public Position getPosition() {
 		return position;
-	}
-
-
-	public boolean getParked() {
-		return this.parked;
-	}
-
-	public void setParked(boolean parked) {
-		this.parked = parked;
 	}
 
 	public int[] getUltrasonicSensor1() {
@@ -61,6 +50,8 @@ public class Car implements carInterface {
 	@Override
 	public Position moveForward() {
 		
+		if(!getPosition().isParked()){
+		
 		if(position.getLocation() < 500 && position.getLocation()>= 0){
 			try {
 				position.setLocation(position.getLocation()+1);
@@ -79,6 +70,7 @@ public class Car implements carInterface {
 				e.printStackTrace();
 			}
 			
+		}
 		}
 		return getPosition();
 	}
@@ -136,6 +128,10 @@ public class Car implements carInterface {
 
 	@Override
 	public void moveBackward() {
+		
+		if(!getPosition().isParked()){
+			
+		
 		if(position.getLocation() <=500 && position.getLocation()> 0){
 			try {
 				position.setLocation(position.getLocation()-1);
@@ -143,6 +139,7 @@ public class Car implements carInterface {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
 		}
 	
 	}
@@ -153,7 +150,7 @@ public class Car implements carInterface {
 			if(getPosition().getLocation()<500){
 				moveForward();
 			}else{
-				setParked(false);
+				getPosition().setParked(false);
 				break;
 			}
 		}
@@ -161,7 +158,7 @@ public class Car implements carInterface {
 		// To-do
 		// Advanced parking maneuver
 		
-		setParked(true);
+		getPosition().setParked(true);
 	}
 
 	@Override
@@ -170,7 +167,7 @@ public class Car implements carInterface {
 		
 		//To-do
 		// Advanced unParking maneuver.
-		setParked(false);
+		getPosition().setParked(false);
 	}
 
 	@Override

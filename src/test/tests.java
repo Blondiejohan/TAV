@@ -12,6 +12,7 @@ public class tests {
 	
 	Car testCar;
 	
+	// here we set up a car with standard values that is used for each test.
 	@Before
 	public void setUp() throws WrongInputException{
 		int[] tmpArr1 = {1,1,1,1,1};
@@ -22,12 +23,15 @@ public class tests {
 	
 	
 	// Tests for moveForward.
+	
+	// This tests the normal move forward too make sure the methods behaves correctly
 	@Test
 	public void testMoveForward(){
 		testCar.moveForward();
 		assertEquals(1,testCar.getPosition().getLocation());
 	}
 	
+	// This tests if we are trying to keep moving the car when the road ends.
 	@Test
 	public void testMoveForwardTooMutch() throws WrongInputException{
 		testCar.setPosition(500,0);
@@ -35,12 +39,14 @@ public class tests {
 		assertEquals(500,testCar.getPosition().getLocation());
 	}
 	
+	// This tests if the starting location when creating the car in a low incorrect value.
 	@Test(expected=WrongInputException.class)
 	public void testMoveForwardLowInput() throws WrongInputException{
 		testCar.setPosition(-5,0);
 		testCar.moveForward();
 	}
 	
+	// This tests if the starting location when creating the car in a high incorrect value.
 	@Test(expected=WrongInputException.class)
 	public void testMoveForwardHighInput() throws WrongInputException{
 		testCar.setPosition(501,0);
@@ -50,13 +56,15 @@ public class tests {
 	
 	
 	//Tests for isEmpty
+	
+	// This tests if the isEmpty method behaves correctly under normal circumstances.
 	@Test
 	public void testIsEmpty() throws WrongInputException{
 		int distance = testCar.isEmpty();
 		assertEquals(1,distance);
 	}
 	
-	
+	// This tests
 	@Test
 	public void testIsEmptyNoise() throws WrongInputException{
 		int[] tmpArr1 = {40,10,50,20,1};
@@ -118,14 +126,29 @@ public class tests {
 	public void testPark() throws WrongInputException{
 		testCar.setPosition(5, 5);
 		testCar.park();
-		assertTrue(testCar.getParked());
+		assertTrue(testCar.getPosition().isParked());
+	}
+	
+	@Test
+	public void testParkMoveForward() throws WrongInputException{
+		testCar.getPosition().setParked(true);
+		testCar.moveForward();
+		assertEquals(0,testCar.getPosition().getLocation());
+	}
+	
+	@Test
+	public void testParkMoveBackward() throws WrongInputException{
+		testCar.setPosition(1, 0);
+		testCar.getPosition().setParked(true);
+		testCar.moveBackward();
+		assertEquals(1,testCar.getPosition().getLocation());
 	}
 	
 	//Tests for unPark
 	@Test
 	public void testUnPark(){
 		testCar.unPark();
-		assertFalse(testCar.getParked());
+		assertFalse(testCar.getPosition().isParked());
 	}
 	
 	//Tests for whereIs
