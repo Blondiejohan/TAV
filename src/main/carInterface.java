@@ -54,7 +54,7 @@ public interface carInterface {
 	  Test-cases:
 
 	*/
-	public boolean park();
+	public void park();
 	/**
 
 	  This method drives itself out of the currect parking spot out to the road.
@@ -66,7 +66,7 @@ public interface carInterface {
 	  Test-cases:
 
 	*/
-	public boolean unPark();
+	public void unPark();
 	
 	/**
 

@@ -23,14 +23,14 @@ public class tests {
 	@Test
 	public void testMoveForward(){
 		testCar.moveForward();
-		assertEquals(1,testCar.position.getLocation());
+		assertEquals(1,testCar.getPosition().getLocation());
 	}
 	
 	@Test
 	public void testMoveForwardTooMutch() throws WrongInputException{
 		testCar.setLocation(500);
 		testCar.moveForward();
-		assertEquals(500,testCar.position.getLocation());
+		assertEquals(500,testCar.getPosition().getLocation());
 	}
 	
 	@Test(expected=WrongInputException.class)
@@ -75,14 +75,14 @@ public class tests {
 	public void testMoveBackward() throws WrongInputException{
 		testCar.setLocation(5);
 		testCar.moveBackward();
-		assertEquals(4,testCar.position.getLocation());
+		assertEquals(4,testCar.getPosition().getLocation());
 	}
 	
 	@Test
 	public void testMoveBackwardTooMutch() throws WrongInputException{
 		testCar.setLocation(0);
 		testCar.moveBackward();
-		assertEquals(0,testCar.position.getLocation());
+		assertEquals(0,testCar.getPosition().getLocation());
 	}
 	
 	@Test(expected=WrongInputException.class)
@@ -100,7 +100,9 @@ public class tests {
 	//tests for Park
 	@Test
 	public void testPark(){
-		assertTrue(testCar.park());
+		testCar.setPosition(5, 5);
+		testCar.park();
+		assertTrue(testCar.getParked());
 	}
 	
 	//Tests for unPark
@@ -115,6 +117,12 @@ public class tests {
 	public void testWhereIs(){
 		Position position = testCar.whereIs();
 		assertTrue(position.getLocation()>=0 && position.getLocation()<=500);
+	}
+	
+	@Test
+	public void testWhereIsNotNull(){
+		Position position = testCar.whereIs();
+		assertNotNull(position);
 	}
 	
 }

@@ -7,7 +7,7 @@ public class Car implements carInterface {
 	private int ultrasonicSensor2;
 	private boolean parked;
 	
-	public Position position;
+	private Position position;
 
 	public Car(int location, boolean parked, int ultrasonicSensor1, int ultrasonicSensor2) throws WrongInputException{
 		setUltrasonicSensor1(ultrasonicSensor1);
@@ -69,7 +69,17 @@ public class Car implements carInterface {
 		
 		if(position.getLocation() < 500 && position.getLocation()>= 0){
 			position.setLocation(position.getLocation()+1);
-			position.setCounter(position.getCounter()+1);
+			try {
+				if(isEmpty()>100){
+					position.setCounter(position.getCounter()+1);
+				}else{
+					position.setCounter(0);
+				}
+			} catch (WrongInputException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		return getPosition();
 	}
@@ -97,24 +107,28 @@ public class Car implements carInterface {
 	}
 
 	@Override
-	public boolean park() {
+	public void park() {
 		while(getPosition().getCounter()<5){
 			if(getPosition().getLocation()<500){
 				moveForward();	
 			}else{
 				setParked(false);
-				return false;
-				
 			}
 		}
+		
+		// To-do
+		// Advanced parking maneuver
+		
 		setParked(true);
-		return true;
 	}
 
 	@Override
-	public boolean unPark() {
-		// TODO Auto-generated method stub
-		return false;
+	public void unPark() {
+		
+		
+		//To-do
+		// Advanced unParking maneuver.
+		setParked(false);
 	}
 
 	@Override
