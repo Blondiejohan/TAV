@@ -17,7 +17,7 @@ public class Car implements carInterface {
 		
 	}
 
-	public void setPosition(int pos, int counter) {
+	public void setPosition(int pos, int counter) throws WrongInputException {
 		position.setLocation(pos);
 		position.setCounter(counter);
 		
@@ -27,16 +27,6 @@ public class Car implements carInterface {
 		return position;
 	}
 
-	
-
-	public void setLocation(int location) throws WrongInputException {
-		if(location<0 || location>500){
-			throw new WrongInputException("Input is wrong");
-		}else{
-			position.setLocation(location);
-		}
-		
-	}
 
 	public boolean getParked() {
 		return this.parked;
@@ -68,7 +58,12 @@ public class Car implements carInterface {
 	public Position moveForward() {
 		
 		if(position.getLocation() < 500 && position.getLocation()>= 0){
-			position.setLocation(position.getLocation()+1);
+			try {
+				position.setLocation(position.getLocation()+1);
+			} catch (WrongInputException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			try {
 				if(isEmpty()>100){
 					position.setCounter(position.getCounter()+1);
@@ -101,7 +96,12 @@ public class Car implements carInterface {
 	@Override
 	public void moveBackward() {
 		if(position.getLocation() <=500 && position.getLocation()> 0){
-			position.setLocation(position.getLocation()-1);
+			try {
+				position.setLocation(position.getLocation()-1);
+			} catch (WrongInputException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	
 	}

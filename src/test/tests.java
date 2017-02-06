@@ -28,20 +28,20 @@ public class tests {
 	
 	@Test
 	public void testMoveForwardTooMutch() throws WrongInputException{
-		testCar.setLocation(500);
+		testCar.setPosition(500,0);
 		testCar.moveForward();
 		assertEquals(500,testCar.getPosition().getLocation());
 	}
 	
 	@Test(expected=WrongInputException.class)
 	public void testMoveForwardLowInput() throws WrongInputException{
-		testCar.setLocation(-5);
+		testCar.setPosition(-5,0);
 		testCar.moveForward();
 	}
 	
 	@Test(expected=WrongInputException.class)
 	public void testMoveForwardHighInput() throws WrongInputException{
-		testCar.setLocation(501);
+		testCar.setPosition(501,0);
 		testCar.moveForward();
 	}
 	
@@ -73,33 +73,33 @@ public class tests {
 	//tests for moveBackward
 	@Test
 	public void testMoveBackward() throws WrongInputException{
-		testCar.setLocation(5);
+		testCar.setPosition(5,0);
 		testCar.moveBackward();
 		assertEquals(4,testCar.getPosition().getLocation());
 	}
 	
 	@Test
 	public void testMoveBackwardTooMutch() throws WrongInputException{
-		testCar.setLocation(0);
+		testCar.setPosition(0,0);
 		testCar.moveBackward();
 		assertEquals(0,testCar.getPosition().getLocation());
 	}
 	
 	@Test(expected=WrongInputException.class)
 	public void testMoveBackwardsLowInput() throws WrongInputException{
-		testCar.setLocation(-5);
+		testCar.getPosition().setLocation(-5);
 		testCar.moveBackward();
 	}
 	
 	@Test(expected=WrongInputException.class)
 	public void testMoveBackwardsHighInput() throws WrongInputException{
-		testCar.setLocation(501);
+		testCar.getPosition().setLocation(501);
 		testCar.moveBackward();
 	}
 	
 	//tests for Park
 	@Test
-	public void testPark(){
+	public void testPark() throws WrongInputException{
 		testCar.setPosition(5, 5);
 		testCar.park();
 		assertTrue(testCar.getParked());

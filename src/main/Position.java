@@ -5,7 +5,7 @@ public class Position {
 	private int location;
 	private int spaceCounter;
 
-	public Position(int roadLocation, int spaceCounter){
+	public Position(int roadLocation, int spaceCounter) throws WrongInputException{
 		setLocation(roadLocation);
 		setCounter(spaceCounter);
 	}
@@ -14,8 +14,12 @@ public class Position {
 		return location;
 	}
 
-	public void setLocation(int location) {
-		this.location = location;
+	public void setLocation(int location) throws WrongInputException {
+		if(location<0 || location>500){
+			throw new WrongInputException("Input is wrong");
+		}else{
+			this.location=location;
+		}
 	}
 
 	public int getCounter() {
