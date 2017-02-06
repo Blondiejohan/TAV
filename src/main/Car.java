@@ -151,9 +151,10 @@ public class Car implements carInterface {
 	public void park() {
 		while(getPosition().getCounter()<5){
 			if(getPosition().getLocation()<500){
-				moveForward();	
+				moveForward();
 			}else{
 				setParked(false);
+				break;
 			}
 		}
 		
