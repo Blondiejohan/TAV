@@ -3,13 +3,15 @@ package main;
 public class Car implements carInterface {
 
 
-	private int ultrasonicSensor1;
-	private int ultrasonicSensor2;
+	private int ultrasonicSensor1[];
+	private int ultrasonicSensor2[];
 	private boolean parked;
+	private int lastValueSensor1;
+	private int lastValueSensor2;
 	
 	private Position position;
 
-	public Car(int location, boolean parked, int ultrasonicSensor1, int ultrasonicSensor2) throws WrongInputException{
+	public Car(int location, boolean parked, int[] ultrasonicSensor1, int[] ultrasonicSensor2) throws WrongInputException{
 		setUltrasonicSensor1(ultrasonicSensor1);
 		setUltrasonicSensor2(ultrasonicSensor2);
 		setParked(parked);
@@ -36,22 +38,24 @@ public class Car implements carInterface {
 		this.parked = parked;
 	}
 
-	public int getUltrasonicSensor1() {
+	public int[] getUltrasonicSensor1() {
 		return ultrasonicSensor1;
 	}
 
-	public void setUltrasonicSensor1(int ultrasonicSensor1) {
+	public void setUltrasonicSensor1(int[] ultrasonicSensor1) {
 		this.ultrasonicSensor1 = ultrasonicSensor1;
 	}
 
-	public int getUltrasonicSensor2() {
+	public int[] getUltrasonicSensor2() {
 		return ultrasonicSensor2;
 	}
 
-	public void setUltrasonicSensor2(int ultrasonicSensor2) {
+	public void setUltrasonicSensor2(int[] ultrasonicSensor2) {
 		this.ultrasonicSensor2 = ultrasonicSensor2;
 	}
 
+	
+	
 	
 	
 	@Override
@@ -81,16 +85,53 @@ public class Car implements carInterface {
 
 	@Override
 	public int isEmpty() throws WrongInputException {
-		int sum = 0;
-		if(ultrasonicSensor1 <0 || ultrasonicSensor1>200 || ultrasonicSensor2 <0 || ultrasonicSensor2>200){
-			throw new WrongInputException("Wrong input");
+		int sumSensor1 = 0;
+		int sumSensor2 = 0;
+		int result = 0;
+		boolean sensor1=true;
+		boolean sensor2=true;
+		lastValueSensor1 = 0;
+		lastValueSensor2 = 0;
+		for(int i = 0;i<ultrasonicSensor1.length;i++){
+			if(ultrasonicSensor1[i] <0 || ultrasonicSensor1[i]>200){
+				throw new WrongInputException("Wrong input");	
 		}
-		for(int i = 0;i<=5;i++){
-			sum = sum+ultrasonicSensor1;
-			sum = sum+ultrasonicSensor2;
+		
 		}
-		sum = sum/10;
-		return sum;
+		
+		for(int i = 0;i<ultrasonicSensor1.length;i++){
+			if(ultrasonicSensor2[i] <0 || ultrasonicSensor2[i]>200){
+				throw new WrongInputException("Wrong input");	
+		}
+		
+		}
+		
+		for(int i = 0;i<5;i++){
+			if(ultrasonicSensor1[i] > lastValueSensor1+10 || ultrasonicSensor1[i] < lastValueSensor1-10){
+				sensor1 = false;	
+			}
+			
+			if(ultrasonicSensor2[i] > lastValueSensor2+10 || ultrasonicSensor2[i] < lastValueSensor2-10){
+				sensor2 = false;
+			}
+			sumSensor1 += ultrasonicSensor1[i];
+			sumSensor2 += ultrasonicSensor2[i];
+		}
+		sumSensor1 = sumSensor1/5;
+		sumSensor2 = sumSensor2/5;
+		
+		if(sensor1 && sensor2){
+			result += sumSensor1;
+			result += sumSensor2;
+			result /=2;
+		}else if(!sensor1 && sensor2){
+			result += sumSensor2;
+		}else if(sensor1 && !sensor2){
+			result += sumSensor1;
+		}
+
+		
+		return result;
 	}
 
 	@Override

@@ -14,7 +14,9 @@ public class tests {
 	
 	@Before
 	public void setUp() throws WrongInputException{
-		testCar = new Car(0,false,0,0);
+		int[] tmpArr1 = {1,1,1,1,1};
+		int[] tmpArr2 = {1,1,1,1,1};
+		testCar = new Car(0,false,tmpArr1,tmpArr2);
 	}
 
 	
@@ -50,22 +52,31 @@ public class tests {
 	//Tests for isEmpty
 	@Test
 	public void testIsEmpty() throws WrongInputException{
-		testCar.setUltrasonicSensor1(1);
-		testCar.setUltrasonicSensor2(1);
 		int distance = testCar.isEmpty();
 		assertEquals(1,distance);
 	}
+	
+	
+	@Test
+	public void testIsEmptyNoise(){
+		
+	}
+	
 	@Test(expected=WrongInputException.class)
 	public void testIsEmptyLowInput() throws WrongInputException{
-		testCar.setUltrasonicSensor1(-1);
-		testCar.setUltrasonicSensor2(-1);
+		int[] tmpArr1 = {-1,-1,-1,-1,-1};
+		int[] tmpArr2 = {-1,-1,-1,-1,-1};
+		testCar.setUltrasonicSensor1(tmpArr1);
+		testCar.setUltrasonicSensor2(tmpArr2);
 		testCar.isEmpty();
 	}
 	
 	@Test(expected=WrongInputException.class)
 	public void testIsEmptyHighInput() throws WrongInputException{
-		testCar.setUltrasonicSensor1(201);
-		testCar.setUltrasonicSensor2(201);
+		int[] tmpArr1 = {201,201,201,201,201};
+		int[] tmpArr2 = {201,201,201,201,201};
+		testCar.setUltrasonicSensor1(tmpArr1);
+		testCar.setUltrasonicSensor2(tmpArr2);
 		testCar.isEmpty();
 	}
 	
