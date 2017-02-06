@@ -6,12 +6,14 @@ public class Car implements carInterface {
 	private boolean parked;
 	private int ultrasonicSensor1;
 	private int ultrasonicSensor2;
+	private int spaceCounter;
 
 	public Car(int location, boolean parked, int ultrasonicSensor1, int ultrasonicSensor2) throws WrongInputException{
-		this.setLocation(location);
-		this.setParked(parked);
-		this.setUltrasonicSensor1(ultrasonicSensor1);
-		this.setUltrasonicSensor2(ultrasonicSensor2);
+		setLocation(location);
+		setParked(parked);
+		setUltrasonicSensor1(ultrasonicSensor1);
+		setUltrasonicSensor2(ultrasonicSensor2);
+		setSpaceCounter(0);
 	}
 
 	public int getLocation() {
@@ -53,7 +55,10 @@ public class Car implements carInterface {
 
 	@Override
 	public void moveForward() {
-		location++;
+		
+		if(location < 500 && location>= 0){
+			location++;
+		}
 	}
 
 	@Override
@@ -72,7 +77,10 @@ public class Car implements carInterface {
 
 	@Override
 	public void moveBackward() {
-		// TODO Auto-generated method stub
+		if(location <=500 && location> 0){
+			location--;
+		}
+	
 	}
 
 	@Override
@@ -92,6 +100,14 @@ public class Car implements carInterface {
 		return null;
 		// TODO Auto-generated method stub
 	
+	}
+
+	public int getSpaceCounter() {
+		return spaceCounter;
+	}
+
+	public void setSpaceCounter(int spaceCounter) {
+		this.spaceCounter = spaceCounter;
 	}
 
 	

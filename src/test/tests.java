@@ -24,7 +24,7 @@ public class tests {
 	
 	@Test
 	public void testMoveForwardTooMutch() throws WrongInputException{
-		testCar.setLocation(499);
+		testCar.setLocation(500);
 		testCar.moveForward();
 		assertEquals(500,testCar.getLocation());
 	}
@@ -61,4 +61,32 @@ public class tests {
 		testCar.setUltrasonicSensor2(201);
 		testCar.isEmpty();
 	}
+	
+	@Test
+	public void testMoveBackward() throws WrongInputException{
+		testCar.setLocation(5);
+		testCar.moveBackward();
+		assertEquals(4,testCar.getLocation());
+	}
+	
+	@Test
+	public void testMoveBackwardTooMutch() throws WrongInputException{
+		testCar.setLocation(0);
+		testCar.moveBackward();
+		assertEquals(0,testCar.getLocation());
+	}
+	
+	@Test(expected=WrongInputException.class)
+	public void testMoveBackwardsLowInput() throws WrongInputException{
+		testCar.setLocation(-5);
+		testCar.moveBackward();
+	}
+	
+	@Test(expected=WrongInputException.class)
+	public void testMoveBackwardsHighInput() throws WrongInputException{
+		testCar.setLocation(501);
+		testCar.moveBackward();
+	}
+	
+	
 }
