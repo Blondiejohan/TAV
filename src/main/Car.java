@@ -5,20 +5,21 @@ public class Car implements carInterface {
 
 	private int ultrasonicSensor1;
 	private int ultrasonicSensor2;
-	private int spaceCounter;
-	private Position position;
+	private boolean parked;
+	
+	public Position position;
 
 	public Car(int location, boolean parked, int ultrasonicSensor1, int ultrasonicSensor2) throws WrongInputException{
 		setUltrasonicSensor1(ultrasonicSensor1);
 		setUltrasonicSensor2(ultrasonicSensor2);
-		setSpaceCounter(0);
-		position = new Position(location,parked);
+		setParked(parked);
+		position = new Position(location,0);
 		
 	}
 
-	public void setPosition(int pos, boolean park) {
+	public void setPosition(int pos, int counter) {
 		position.setLocation(pos);
-		position.setParked(park);
+		position.setCounter(counter);
 		
 	}
 	
@@ -26,9 +27,7 @@ public class Car implements carInterface {
 		return position;
 	}
 
-	public int getLocation() {
-		return position.getLocation();
-	}
+	
 
 	public void setLocation(int location) throws WrongInputException {
 		if(location<0 || location>500){
@@ -39,12 +38,12 @@ public class Car implements carInterface {
 		
 	}
 
-	public boolean isParked() {
-		return position.isParked();
+	public boolean getParked() {
+		return this.parked;
 	}
 
 	public void setParked(boolean parked) {
-		position.setParked(parked);
+		this.parked = parked;
 	}
 
 	public int getUltrasonicSensor1() {
@@ -63,13 +62,16 @@ public class Car implements carInterface {
 		this.ultrasonicSensor2 = ultrasonicSensor2;
 	}
 
+	
+	
 	@Override
 	public Position moveForward() {
 		
 		if(position.getLocation() < 500 && position.getLocation()>= 0){
 			position.setLocation(position.getLocation()+1);
+			position.setCounter(position.getCounter()+1);
 		}
-		return this.position;
+		return getPosition();
 	}
 
 	@Override
@@ -96,8 +98,17 @@ public class Car implements carInterface {
 
 	@Override
 	public boolean park() {
-		// TODO Auto-generated method stub
-		return false;
+		while(getPosition().getCounter()<5){
+			if(getPosition().getLocation()<500){
+				moveForward();	
+			}else{
+				setParked(false);
+				return false;
+				
+			}
+		}
+		setParked(true);
+		return true;
 	}
 
 	@Override
@@ -108,17 +119,7 @@ public class Car implements carInterface {
 
 	@Override
 	public Position whereIs() {
-		return null;
-		// TODO Auto-generated method stub
-	
-	}
-
-	public int getSpaceCounter() {
-		return spaceCounter;
-	}
-
-	public void setSpaceCounter(int spaceCounter) {
-		this.spaceCounter = spaceCounter;
+		return getPosition();
 	}
 
 	

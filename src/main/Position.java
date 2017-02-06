@@ -3,11 +3,11 @@ package main;
 public class Position {
 
 	private int location;
-	private boolean parked;
+	private int spaceCounter;
 
-	public Position(int roadLocation, boolean parked){
+	public Position(int roadLocation, int spaceCounter){
 		setLocation(roadLocation);
-		setParked(parked);
+		setCounter(spaceCounter);
 	}
 
 	public int getLocation() {
@@ -18,11 +18,11 @@ public class Position {
 		this.location = location;
 	}
 
-	public boolean isParked() {
-		return parked;
+	public int getCounter() {
+		return this.spaceCounter;
 	}
 
-	public void setParked(boolean parked) {
-		this.parked = parked;
+	public void setCounter(int spaceCounter) {
+		this.spaceCounter = spaceCounter;
 	}
 }

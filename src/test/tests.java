@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import main.Car;
+import main.Position;
 import main.WrongInputException;
 public class tests {
 	
@@ -16,17 +17,20 @@ public class tests {
 		testCar = new Car(0,false,0,0);
 	}
 
+	
+	
+	// Tests for moveForward.
 	@Test
 	public void testMoveForward(){
 		testCar.moveForward();
-		assertEquals(1,testCar.getLocation());
+		assertEquals(1,testCar.position.getLocation());
 	}
 	
 	@Test
 	public void testMoveForwardTooMutch() throws WrongInputException{
 		testCar.setLocation(500);
 		testCar.moveForward();
-		assertEquals(500,testCar.getLocation());
+		assertEquals(500,testCar.position.getLocation());
 	}
 	
 	@Test(expected=WrongInputException.class)
@@ -41,6 +45,9 @@ public class tests {
 		testCar.moveForward();
 	}
 	
+	
+	
+	//Tests for isEmpty
 	@Test
 	public void testIsEmpty() throws WrongInputException{
 		testCar.setUltrasonicSensor1(1);
@@ -62,18 +69,20 @@ public class tests {
 		testCar.isEmpty();
 	}
 	
+	
+	//tests for moveBackward
 	@Test
 	public void testMoveBackward() throws WrongInputException{
 		testCar.setLocation(5);
 		testCar.moveBackward();
-		assertEquals(4,testCar.getLocation());
+		assertEquals(4,testCar.position.getLocation());
 	}
 	
 	@Test
 	public void testMoveBackwardTooMutch() throws WrongInputException{
 		testCar.setLocation(0);
 		testCar.moveBackward();
-		assertEquals(0,testCar.getLocation());
+		assertEquals(0,testCar.position.getLocation());
 	}
 	
 	@Test(expected=WrongInputException.class)
@@ -88,5 +97,29 @@ public class tests {
 		testCar.moveBackward();
 	}
 	
+	//tests for Park
+	@Test
+	public void testPark(){
+		assertTrue(testCar.park());
+	}
+	
+	//Tests for unPark
+	@Test
+	public void testUnPark(){
+		testCar.unPark();
+		assertFalse(testCar.getParked());
+	}
+	
+	//Tests for whereIs
+	@Test
+	public void testWhereIs(){
+		Position position = testCar.whereIs();
+		assertTrue(position.getLocation()>=0 && position.getLocation()<=500);
+	}
 	
 }
+
+
+
+
+
