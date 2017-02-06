@@ -58,8 +58,13 @@ public class tests {
 	
 	
 	@Test
-	public void testIsEmptyNoise(){
+	public void testIsEmptyNoise() throws WrongInputException{
+		int[] tmpArr1 = {40,10,50,20,1};
+		int[] tmpArr2 = {30,10,80,100,5};
+		testCar.setUltrasonicSensor1(tmpArr1);
+		testCar.setUltrasonicSensor2(tmpArr2);
 		
+		assertEquals(0,testCar.isEmpty());
 	}
 	
 	@Test(expected=WrongInputException.class)
