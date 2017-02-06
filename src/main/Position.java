@@ -6,8 +6,8 @@ public class Position {
 	private boolean parked;
 
 	public Position(int roadLocation, boolean parked){
-		this.setLocation(roadLocation);
-		this.setParked(parked);
+		setLocation(roadLocation);
+		setParked(parked);
 	}
 
 	public int getLocation() {

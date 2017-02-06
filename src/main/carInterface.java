@@ -11,9 +11,10 @@ public interface carInterface {
 	  Post-condition: if the car is on meter 499 or less it moves one meter forward.
 	  
 	  Test-cases:
+	 * @return 
 
 	*/
-	public void moveForward();
+	public Position moveForward();
 	
 	/**
 

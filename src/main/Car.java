@@ -2,39 +2,49 @@ package main;
 
 public class Car implements carInterface {
 
-	private int location;
-	private boolean parked;
+
 	private int ultrasonicSensor1;
 	private int ultrasonicSensor2;
 	private int spaceCounter;
+	private Position position;
 
 	public Car(int location, boolean parked, int ultrasonicSensor1, int ultrasonicSensor2) throws WrongInputException{
-		setLocation(location);
-		setParked(parked);
 		setUltrasonicSensor1(ultrasonicSensor1);
 		setUltrasonicSensor2(ultrasonicSensor2);
 		setSpaceCounter(0);
+		position = new Position(location,parked);
+		
+	}
+
+	public void setPosition(int pos, boolean park) {
+		position.setLocation(pos);
+		position.setParked(park);
+		
+	}
+	
+	public Position getPosition() {
+		return position;
 	}
 
 	public int getLocation() {
-		return location;
+		return position.getLocation();
 	}
 
 	public void setLocation(int location) throws WrongInputException {
 		if(location<0 || location>500){
 			throw new WrongInputException("Input is wrong");
 		}else{
-			this.location = location;
+			position.setLocation(location);
 		}
 		
 	}
 
 	public boolean isParked() {
-		return parked;
+		return position.isParked();
 	}
 
 	public void setParked(boolean parked) {
-		this.parked = parked;
+		position.setParked(parked);
 	}
 
 	public int getUltrasonicSensor1() {
@@ -54,11 +64,12 @@ public class Car implements carInterface {
 	}
 
 	@Override
-	public void moveForward() {
+	public Position moveForward() {
 		
-		if(location < 500 && location>= 0){
-			location++;
+		if(position.getLocation() < 500 && position.getLocation()>= 0){
+			position.setLocation(position.getLocation()+1);
 		}
+		return this.position;
 	}
 
 	@Override
@@ -77,8 +88,8 @@ public class Car implements carInterface {
 
 	@Override
 	public void moveBackward() {
-		if(location <=500 && location> 0){
-			location--;
+		if(position.getLocation() <=500 && position.getLocation()> 0){
+			position.setLocation(position.getLocation()-1);
 		}
 	
 	}
