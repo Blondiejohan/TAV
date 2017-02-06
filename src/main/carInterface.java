@@ -4,11 +4,11 @@ public interface carInterface {
 
 	/**
 	 * 
-	  This method moves the card forward one meter and checks if there is an open parking spot
+	  The method checks whether the car is within the track range and it moves one meter forward.
 	  
-	  Pre-condition: car is between 0 and 500 meter of the road.
+	  Pre-condition: The car is between 0 and 499 meters.
 
-	  Post-condition: if the car is on meter 499 or less it moves one meter forward.
+	  Post-condition:  If conditions are met, the car has moved one meter further.
 	  
 	  Test-cases:
 	 * @throws WrongInputException 
@@ -19,11 +19,11 @@ public interface carInterface {
 	
 	/**
 
-	  Description
+	  The car queries two ultrasonic sensors to get the distance from objects in order to establish if there is an empty parking space.
 
-	  Pre-condition: Car object
+	  Pre-condition: Both sensors are fully functional in delivering distance
 
-	  Post-condition: distance to target.
+	  Post-condition: Distance is delivered after noise filtering.
 	  
 	  Test-cases:
 	
@@ -33,13 +33,17 @@ public interface carInterface {
 	
 	/**
 
-	  Moves the car backwards one meter.
+	  The method moves the car one meter back
 	  
-	  Pre-condition: Car object
+	  Pre-condition: The car has to be within defined ranges
 
-	  Post-condition:  car object
+	  Post-condition: The car has moved one meter back
 	  
-	  Test-cases:
+	  Test-cases: 	Move backwards when position = 5
+					Move backwards when position = 0
+					Move backwards when position < 0
+					Move backwards when postion > 500
+					Move backwards when parked
 	 * @return 
 
 	*/
@@ -47,11 +51,11 @@ public interface carInterface {
 	
 	/**
 
-	  The car drives untill it finds a parking spot and parks there.
+	  The car moves to the start of the free parking spot or until it reaches the end of the street detects the next free parking spot. 
 
-	  Pre-condition: Car object
+	  Pre-condition: The car has detected a five meter parking spot
 
-	  Post-condition: boolean Parked.
+	  Post-condition: The car is parked
 	  
 	  Test-cases:
 	 * @throws WrongInputException 
@@ -61,11 +65,11 @@ public interface carInterface {
 	public void park() throws NoSensorInputException, WrongInputException;
 	/**
 
-	  This method drives itself out of the currect parking spot out to the road.
+	  The parked car exits the parking slot and continues the navigation.
 
-	  Pre-condition: Car object
+	  Pre-condition: The car is already parked
 
-	  Post-condition: boolean park.
+	  Post-condition: The car has completely exited the parking slot and it is again in circulation.
 	  
 	  Test-cases:
 
@@ -74,11 +78,11 @@ public interface carInterface {
 	
 	/**
 
-	  This car checks the current position of the car and if it is parked or not.
+	  This method checks the position of the car on the street and its situation.
 
-	  Pre-condition: Car object
+	  Pre-condition: The car is within the defined ranges (0-500)
 
-	  Post-condition: Car object
+	  Post-condition: Car position and situation remained unmodified
 	  
 	  Test-cases:
 	 * @return 
