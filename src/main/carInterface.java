@@ -82,6 +82,7 @@ public interface carInterface {
 	  Post-condition: The car has completely exited the parking slot and it is again in circulation.
 	  
 	  Test-cases: 1. testUnPark() : Parked car moves forward and to the left
+	  2. testUnParkOutOfPosition(): Test if car position is out of bounds
 
 	*/
 	public void unPark();
