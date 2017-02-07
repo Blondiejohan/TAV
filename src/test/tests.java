@@ -25,7 +25,7 @@ public class tests {
 	
 	// Tests for moveForward.
 	
-	// This tests the normal move forward too make sure the methods behaves correctly
+	// This tests the normal move forward to make sure the methods behaves correctly
 	@Test
 	public void testMoveForward() throws NoSensorInputException, WrongInputException{
 		testCar.moveForward();
@@ -94,7 +94,16 @@ public class tests {
 		testCar.setUltrasonicSensor2(tmpArr2);
 		testCar.isEmpty();
 	}
-	
+	//Test for the correct input detected by the sensors
+	@Test
+	public void testIsEmptyCorrectInput() throws WrongInputException, NoSensorInputException {
+		int[] tmpArr1 = {100,95,97,101,100};
+		int[] tmpArr2 = {99,98,102,105,101};
+		testCar.setUltrasonicSensor1(tmpArr1);
+		testCar.setUltrasonicSensor2(tmpArr2);
+		assertEquals(99, testCar.isEmpty());
+		
+	}
 	
 	//tests for moveBackward
 	
