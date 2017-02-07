@@ -170,13 +170,19 @@ public class tests {
 	
 	//Tests for unPark
 	
-	// This tests if the method behaves correctly during normal run.
+	// This tests if the method behaves correctly when the car is not parked
 	@Test
 	public void testUnPark(){
 		testCar.unPark();
 		assertFalse(testCar.getPosition().isParked());
 	}
 	
+	// This tests if the method fails when out of position
+		@Test(expected=WrongInputException.class)
+		public void testUnParkOutOfPosition() throws WrongInputException{
+			testCar.setPosition(-5, 0);
+			testCar.unPark();
+		}
 	
 	//Tests for whereIs
 	
