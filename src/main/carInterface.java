@@ -10,10 +10,10 @@ public interface carInterface {
 
 	  Post-condition:  If conditions are met, the car has moved one meter further.
 	  
-	  Test-cases: 	Move forward when position>0 && position<499
-	  				Move forward when position<0
-	  				Move forward when position>500
-	  				Move forward when position=500
+	  Test-cases: 	testMoveForward(): Move forward when position>0 && position<499
+	  				testMoveForwardLowInput(): Move forward when position<0
+	  				testMoveForwardTooMutch(): Move forward when position>500
+	  				testMoveForwardHighInput(): Move forward when position=500
 	 * @throws WrongInputException 
 	
 
@@ -28,9 +28,10 @@ public interface carInterface {
 
 	  Post-condition: Distance is delivered after noise filtering.
 	  
-	  Test-cases:	Sensors values>0 && Sensor values<200
-	  				Sensors values<0
-	  				Sensors values>200
+	  Test-cases:	testIsEmpty(): 
+	  				testIsEmptyNoise(): Sensors values>0 && Sensor values<200
+	  				testIsEmptyLowInput(): Sensors values<0
+	  				testIsEmptyHighInput(): Sensors values>200
 	
 
 	*/
@@ -44,10 +45,10 @@ public interface carInterface {
 
 	  Post-condition: The car has moved one meter back
 	  
-	  Test-cases: 	Move backwards when position = 5
-					Move backwards when position = 0
-					Move backwards when position < 0
-					Move backwards when postion > 500
+	  Test-cases: 	testMoveBackward(): Move backwards when position = 5
+					testMoveBackwardTooMutch(): Move backwards when position = 0
+					testMoveBackwardsLowInput(): Move backwards when position < 0
+					testMoveBackwardsHighInput(): Move backwards when position > 500
 					Move backwards when parked
 	 * @return 
 
@@ -62,8 +63,9 @@ public interface carInterface {
 
 	  Post-condition: The car is parked
 	  
-	  Test-cases:	Car can park
-	  				Car isn't parked
+	  Test-cases:	testPark(): Car can park
+	  				testParkMoveForward(): Car is parked and can move forward
+	  				testParkMoveBackward(): Car is parked and can move backward
 	 * @throws WrongInputException 
 	 * @throws NoSensorInputException 
 
@@ -92,10 +94,9 @@ public interface carInterface {
 
 	  Post-condition: Car position and situation remained unmodified
 	  
-	  Test-cases:	Car position >= 0
-	  				Car position <=0
-	  				Car position is null
-	  				Car is parked
+	  Test-cases:	testWhereIsLocation(): Car position >= 0 && car position <=500
+	  				testWhereIsNotNull(): Car position doesn't have a null value
+	  				testWhereIsParkingCounter(): Car detects parking
 	 * @return 
 
 	*/
