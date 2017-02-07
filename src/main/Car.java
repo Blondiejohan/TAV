@@ -16,6 +16,7 @@ public class Car implements carInterface {
 	public Car(int location, boolean parked, int[] ultrasonicSensor1, int[] ultrasonicSensor2) throws WrongInputException{
 		setUltrasonicSensor1(ultrasonicSensor1);
 		setUltrasonicSensor2(ultrasonicSensor2);
+		//position is an object containing an integer location, a counter and a boolean parked
 		position = new Position(location,0,parked);
 		
 	}
@@ -49,13 +50,13 @@ public class Car implements carInterface {
 		//moveForward implementation
 	@Override
 	public Position moveForward() throws NoSensorInputException, WrongInputException {
-		
+		//if the car is not parked
 		if(!getPosition().isParked()){
-		
+		//if the car is within the raanges
 		if(position.getLocation() < 500 && position.getLocation()>= 0){
-		
+		//move forward
 				position.setLocation(position.getLocation()+1);
-		}
+		}//if it detects spacing places it saves them in the counter
 		if(isEmpty()>100){
 					position.setCounter(position.getCounter()+1);
 				}else{

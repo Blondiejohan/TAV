@@ -1,12 +1,12 @@
 package main;
-
+//this class holds all details of the position object
 public class Position {
 
 	private int location;
 	private int spaceCounter;
 	private boolean parked;
 	
-
+//Position object constructor
 	public Position(int roadLocation, int spaceCounter, boolean parked) throws WrongInputException{
 		setLocation(roadLocation);
 		setCounter(spaceCounter);
@@ -16,7 +16,7 @@ public class Position {
 	public int getLocation() {
 		return location;
 	}
-
+	//check boundaries
 	public void setLocation(int location) throws WrongInputException {
 		if(location<0 || location>500){
 			throw new WrongInputException("Input is wrong");
