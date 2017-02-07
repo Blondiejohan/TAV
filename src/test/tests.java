@@ -133,7 +133,7 @@ public class tests {
 	//tests for Park
 	
 	
-	// This tests if the method parks correclty during normal run
+	// This tests if the method parks correctly during normal run
 	@Test
 	public void testPark() throws WrongInputException, NoSensorInputException{
 		testCar.setPosition(5, 5);
