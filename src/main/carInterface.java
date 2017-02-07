@@ -10,7 +10,10 @@ public interface carInterface {
 
 	  Post-condition:  If conditions are met, the car has moved one meter further.
 	  
-	  Test-cases:
+	  Test-cases: 	Move forward when position>0 && position<499
+	  				Move forward when position<0
+	  				Move forward when position>500
+	  				Move forward when position=500
 	 * @throws WrongInputException 
 	
 
@@ -25,7 +28,9 @@ public interface carInterface {
 
 	  Post-condition: Distance is delivered after noise filtering.
 	  
-	  Test-cases:
+	  Test-cases:	Sensors values>0 && Sensor values<200
+	  				Sensors values<0
+	  				Sensors values>200
 	
 
 	*/
@@ -57,7 +62,8 @@ public interface carInterface {
 
 	  Post-condition: The car is parked
 	  
-	  Test-cases:
+	  Test-cases:	Car can park
+	  				Car isn't parked
 	 * @throws WrongInputException 
 	 * @throws NoSensorInputException 
 
@@ -71,7 +77,9 @@ public interface carInterface {
 
 	  Post-condition: The car has completely exited the parking slot and it is again in circulation.
 	  
-	  Test-cases:
+	  Test-cases:	Car is parked
+	  				Car can move forward
+	  				Car can move backward
 
 	*/
 	public void unPark();
@@ -84,7 +92,10 @@ public interface carInterface {
 
 	  Post-condition: Car position and situation remained unmodified
 	  
-	  Test-cases:
+	  Test-cases:	Car position >= 0
+	  				Car position <=0
+	  				Car position is null
+	  				Car is parked
 	 * @return 
 
 	*/
