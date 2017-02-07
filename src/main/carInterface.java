@@ -11,9 +11,9 @@ public interface carInterface {
 	  Post-condition:  If conditions are met, the car has moved one meter further.
 	  
 	  Test-cases: 1. testMoveForward(): Move forward when position>=0 && position<=499
-	  2. testMoveForwardTooMutch(): Move forward when position>500
-	  3. testMoveForwardLowInput(): Move forward when position<0
-	  4. testMoveForwardHighInput(): Move forward when position=500
+	              2. testMoveForwardTooMutch(): Move forward when position>500
+	              3. testMoveForwardLowInput(): Move forward when position<0
+	              4. testMoveForwardHighInput(): Move forward when position=500
 	 
 	 * @throws WrongInputException 
 	
@@ -30,9 +30,9 @@ public interface carInterface {
 	  Post-condition: Distance is delivered after noise filtering.
 	  
 	  Test-cases: 1. testIsEmpty(): returns the distance to the nearest object with the two sensors behave good
-	  2. testIsEmptyNoise(): Sensors values>0 && Sensors values<200
-	  3. testIsEmptyLowInput(): Sensors values<0
-	  4. testIsEmptyHighInput(): Sensors values>200
+	              2. testIsEmptyNoise(): Sensors values>0 && Sensors values<200
+	              3. testIsEmptyLowInput(): Sensors values<0
+	              4. testIsEmptyHighInput(): Sensors values>200
 	
 
 	*/
@@ -47,9 +47,9 @@ public interface carInterface {
 	  Post-condition: The car has moved one meter back
 	  
 	  Test-cases: 1. testMoveBackward(): Move backwards when position>0 && position<500
-	  2. testMoveBackwardTooMutch(): Move backwards when position = 0
-	  3. testMoveBackwardsLowInput(): Move backwards when position < 0
-	  4. testMoveBackwardsHighInput(): Move backwards when position > 500
+	              2. testMoveBackwardTooMutch(): Move backwards when position = 0
+	              3. testMoveBackwardsLowInput(): Move backwards when position < 0
+	              4. testMoveBackwardsHighInput(): Move backwards when position > 500
 	 
 	 * @return 
 
@@ -65,8 +65,8 @@ public interface carInterface {
 	  Post-condition: The car is parked
 	  
 	  Test-cases: 1. testPark(): When car detects an available parking spot, it's parking.
-	  2. testParkMoveForward(): Parked car can move forward.
-	  3. testParkMoveBackward(): Parked car can move backward.
+	              2. testParkMoveForward(): Parked car can move forward.
+	              3. testParkMoveBackward(): Parked car can move backward.
 	 
 	 * @throws WrongInputException 
 	 * @throws NoSensorInputException 
@@ -82,7 +82,7 @@ public interface carInterface {
 	  Post-condition: The car has completely exited the parking slot and it is again in circulation.
 	  
 	  Test-cases: 1. testUnPark() : Parked car moves forward and to the left
-	  2. testUnParkOutOfPosition(): Test if car position is out of bounds
+	              2. testUnParkOutOfPosition(): Test if car position is out of bounds
 
 	*/
 	public void unPark();
@@ -96,8 +96,8 @@ public interface carInterface {
 	  Post-condition: Car position and situation remained unmodified
 	  
 	  Test-cases: 1. testWhereIsLocation(): Car position >= 0 && car position <=500
-	  2. testWhereIsNotNull(): Car position doesn't have a null value
-	  3. testWhereIsParkingCounter(): Car is parked
+	              2. testWhereIsNotNull(): Car position doesn't have a null value
+	              3. testWhereIsParkingCounter(): Car is parked
 	 * @return 
 
 	*/
