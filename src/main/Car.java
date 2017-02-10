@@ -13,6 +13,7 @@ public class Car implements carInterface {
 	private Position position;
 
 	//constructor which initialize all needed objects
+	//the car object is needed as precondition to most of the test cases
 	
 	public Car(int location, boolean parked, int[] ultrasonicSensor1, int[] ultrasonicSensor2) throws WrongInputException{
 		setUltrasonicSensor1(ultrasonicSensor1);
@@ -28,14 +29,17 @@ public class Car implements carInterface {
 		
 	}
 	//position getter
+	//
 	public Position getPosition() {
 		return position;
 	}
 	//ultrasonic sensor1 getter
+	//
 	public int[] getUltrasonicSensor1() {
 		return ultrasonicSensor1;
 	}
 	//ultrasonic sensor1 setter
+	//
 	public void setUltrasonicSensor1(int[] ultrasonicSensor1) {
 		this.ultrasonicSensor1 = ultrasonicSensor1;
 	}
@@ -49,11 +53,12 @@ public class Car implements carInterface {
 	}
 
 		//moveForward implementation
+	// used for the implementation of moveForward, moveBackwards
 	@Override
 	public Position moveForward() throws NoSensorInputException, WrongInputException {
 		//if the car is not parked
 		if(!getPosition().isParked()){
-		//if the car is within the raanges
+		//if the car is within the ranges
 		if(position.getLocation() < 500 && position.getLocation()>= 0){
 		//move forward
 				position.setLocation(position.getLocation()+1);
@@ -67,6 +72,7 @@ public class Car implements carInterface {
 		return getPosition();
 	}
 	//isEmpty implementation method
+	//used for isEmpty test cases
 	@Override
 	public int isEmpty() throws WrongInputException, NoSensorInputException {
 		int sumSensor1 = 0;		//sensors declaration
@@ -160,6 +166,7 @@ public class Car implements carInterface {
 	}											//a suitable place to park --> it parks;
 	
 	//unPark implementation - it sets the parked method to false and gets the position.
+	//used for the unPark test method.
 	@Override
 	public void unPark() {
 		
@@ -168,6 +175,7 @@ public class Car implements carInterface {
 		getPosition().setParked(false);
 	}
 	// whereIs method implementation - it returns the position of the car
+	//it uses the class Position
 	@Override
 	public Position whereIs() {
 		return getPosition();

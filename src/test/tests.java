@@ -20,8 +20,6 @@ public class tests {
 		int[] tmpArr2 = {1,1,1,1,1};
 		testCar = new Car(0,false,tmpArr1,tmpArr2);
 	}
-
-	
 	
 	// Tests for moveForward.
 	
@@ -107,7 +105,7 @@ public class tests {
 	
 	//tests for moveBackward
 	
-	// This tests if the method move backards behaves correcltly under normal run.
+	// This tests if the method move backward behaves correctly under normal run.
 	@Test
 	public void testMoveBackward() throws WrongInputException{
 		testCar.setPosition(5,0);

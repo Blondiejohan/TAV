@@ -1,5 +1,6 @@
 package main;
 //this class holds all details of the position object
+//it serves all the tests where position is needed: whereIs
 public class Position {
 
 	private int location;
@@ -18,6 +19,7 @@ public class Position {
 	}
 	//check boundaries
 	public void setLocation(int location) throws WrongInputException {
+		//if we are not within the track limits
 		if(location<0 || location>500){
 			throw new WrongInputException("Input is wrong");
 		}else{
