@@ -7,7 +7,7 @@ public class Position {
 	private int spaceCounter;
 	private boolean parked;
 	
-//Position object constructor
+//Position object constructor.
 	public Position(int roadLocation, int spaceCounter, boolean parked) throws WrongInputException{
 		setLocation(roadLocation);
 		setCounter(spaceCounter);
