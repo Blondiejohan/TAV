@@ -1,7 +1,7 @@
 package main;
 import org.mockito.*;
 
-//implementation of the car Interface class
+//implementation of the car class
 
 public class Car implements carInterface {
 
