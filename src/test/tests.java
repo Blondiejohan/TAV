@@ -135,9 +135,7 @@ public class tests {
 		testCar.getMovementController().getPosition().setLocation(501);
 		testCar.moveBackward();
 	}
-	
-	
-	
+		
 	//tests for Park
 	
 	
