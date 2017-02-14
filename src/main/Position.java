@@ -4,13 +4,13 @@ package main;
 public class Position {
 
 	private int location;
-	private int spaceCounter;
+	private int[] spaceCounter;
 	private boolean parked;
 	
 //Position object constructor.
-	public Position(int roadLocation, int spaceCounter, boolean parked) throws WrongInputException{
+	public Position(int roadLocation, int i, boolean parked) throws WrongInputException{
 		setLocation(roadLocation);
-		setCounter(spaceCounter);
+		spaceCounter = new int[]{0};
 		
 	}
 
@@ -27,12 +27,12 @@ public class Position {
 		}
 	}
 
-	public int getCounter() {
+	public int[] getCounter() {
 		return this.spaceCounter;
 	}
 
-	public void setCounter(int spaceCounter) {
-		this.spaceCounter = spaceCounter;
+	public void setCounter(int pos, int j) {
+		this.spaceCounter[pos] = j;
 	}
 
 	public boolean isParked() {

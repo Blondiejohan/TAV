@@ -5,71 +5,53 @@ import org.mockito.*;
 
 public class Car implements carInterface {
 
-	//ultrasonic sensor arrays where distance is stored
-	private int ultrasonicSensor1[];
-	private int ultrasonicSensor2[];
+	
+	
 	
 	//position initialization
-	private Position position;
+	private UltrasonicSensor1 sensor1;
+	private Ultrasonicsensor2 sensor2;
+	private MovementController movementController;
 
 	//constructor which initialize all needed objects
 	//the car object is needed as precondition to most of the test cases
 	
 	public Car(int location, boolean parked, int[] ultrasonicSensor1, int[] ultrasonicSensor2) throws WrongInputException{
-		setUltrasonicSensor1(ultrasonicSensor1);
-		setUltrasonicSensor2(ultrasonicSensor2);
+		
+		setSensor1(new UltrasonicSensor1(ultrasonicSensor1));
+		setSensor2(new Ultrasonicsensor2(ultrasonicSensor2));
+		
 		//position is an object containing an integer location, a counter and a boolean parked
-		position = new Position(location,0,parked);
+		movementController = new MovementController(location,0,parked);
 		
 	}
-	//position setter 
-	public void setPosition(int pos, int counter) throws WrongInputException {
-		position.setLocation(pos);
-		position.setCounter(counter);
-		
-	}
-	//position getter
-	//
-	public Position getPosition() {
-		return position;
-	}
-	//ultrasonic sensor1 getter
-	//
-	public int[] getUltrasonicSensor1() {
-		return ultrasonicSensor1;
-	}
-	//ultrasonic sensor1 setter
-	//
-	public void setUltrasonicSensor1(int[] ultrasonicSensor1) {
-		this.ultrasonicSensor1 = ultrasonicSensor1;
-	}
-	//ultrasonic sensor2 getter
-	public int[] getUltrasonicSensor2() {
-		return ultrasonicSensor2;
-	}
-	//ultrasonic sensor2 setter
-	public void setUltrasonicSensor2(int[] ultrasonicSensor2) {
-		this.ultrasonicSensor2 = ultrasonicSensor2;
-	}
+	
 
 		//moveForward implementation
 	// used for the implementation of moveForward, moveBackwards
 	@Override
 	public Position moveForward() throws NoSensorInputException, WrongInputException {
+		
+		int parkingSpot = 0;
+		
 		//if the car is not parked
-		if(!getPosition().isParked()){
+		if(!movementController.getPosition().isParked()){
 		//if the car is within the ranges
-		if(position.getLocation() < 500 && position.getLocation()>= 0){
+		if(movementController.getPosition().getLocation() < 500 && movementController.getPosition().getLocation()>= 0){
 		//move forward
-				position.setLocation(position.getLocation()+1);
+			movementController.accelerate();
+			
+			if(isEmpty()>100){
+				movementController.getPosition().setCounter(parkingSpot, 1);
+				parkingSpot++;
+			}else{
+				movementController.getPosition().setCounter(parkingSpot, 0);
+				parkingSpot++;
+			}
 		}//if it detects spacing places it saves them in the counter
-		if(isEmpty()>100){
-					position.setCounter(position.getCounter()+1);
-				}else{
-					position.setCounter(0);
+		
 		}
-		}
-		return getPosition();
+		return movementController.getPosition();
 	}
 	//isEmpty implementation method
 	//used for isEmpty test cases
@@ -78,19 +60,19 @@ public class Car implements carInterface {
 		int sumSensor1 = 0;		//sensors declaration
 		int sumSensor2 = 0;
 		int result = 0;
-		boolean sensor1=true;	// sensors are active
-		boolean sensor2=true;
-		int lastValueSensor1= ultrasonicSensor1[0];		//sensor arrays are initialized with the last value at position 1
-		int lastValueSensor2 = ultrasonicSensor2[0];
+		boolean sensorBool1=true;	// sensors are active
+		boolean sensorBool2=true;
+		int lastValueSensor1= sensor1.getUltrasonicArray1()[0];		//sensor arrays are initialized with the last value at position 1
+		int lastValueSensor2 = sensor2.getUltrasonicArray2()[0];	
 		
 		//array check
-		for(int i = 0;i<ultrasonicSensor1.length;i++){
-			if(ultrasonicSensor1[i] <0 || ultrasonicSensor1[i]>200){		//ultrasonic sensor1 out of boundary check
+		for(int i = 0;i<sensor1.getUltrasonicArray1().length;i++){
+			if(sensor1.getUltrasonicArray1()[i] <0 || sensor1.getUltrasonicArray1()[i]>200){		//ultrasonic sensor1 out of boundary check
 				throw new NoSensorInputException("Bad sensor input");	
 			}
 		}
-		for(int i = 0;i<ultrasonicSensor1.length;i++){						//ultrasonic sensor 2 out of boundary check 
-			if(ultrasonicSensor2[i] <0 || ultrasonicSensor2[i]>200){
+		for(int i = 0;i<sensor2.getUltrasonicArray2().length;i++){						//ultrasonic sensor 2 out of boundary check 
+			if(sensor2.getUltrasonicArray2()[i] <0 || sensor2.getUltrasonicArray2()[i]>200){
 				throw new NoSensorInputException("bad sensor input");
 			}
 		}
@@ -98,32 +80,32 @@ public class Car implements carInterface {
 		for(int i = 0;i<5;i++){			/*requirements implementation of 5 times filtering through averaging
 			data filtering: the sensor is "disabled" if the current value is less/greater 
 			than the last value +/- 10 */
-			if(ultrasonicSensor1[i]+10 < lastValueSensor1 || ultrasonicSensor1[i]-10 > lastValueSensor1){
-				sensor1 = false;	
+			if(sensor1.getUltrasonicArray1()[i]+10 < lastValueSensor1 || sensor2.getUltrasonicArray2()[i]-10 > lastValueSensor1){
+				sensorBool1 = false;	
 			}
 			//data filtering for ultrasonic sensor 2
-			if(ultrasonicSensor2[i]+10 < lastValueSensor2 || ultrasonicSensor2[i]-10 > lastValueSensor2){
-				sensor2 = false;
+			if(sensor2.getUltrasonicArray2()[i]+10 < lastValueSensor2 || sensor2.getUltrasonicArray2()[i]-10 > lastValueSensor2){
+				sensorBool2 = false;
 			}
 			//data is stored in arrays
-			sumSensor1 += ultrasonicSensor1[i];
-			sumSensor2 += ultrasonicSensor2[i];
+			sumSensor1 += sensor1.getUltrasonicArray1()[i];
+			sumSensor2 += sensor2.getUltrasonicArray2()[i];
 			
-			lastValueSensor2 = ultrasonicSensor2[i];
-			lastValueSensor1 = ultrasonicSensor1[i];
+			lastValueSensor2 = sensor2.getUltrasonicArray2()[i];
+			lastValueSensor1 = sensor1.getUltrasonicArray1()[i];
 		}
 		sumSensor1 = sumSensor1/5; //average calculation
 		sumSensor2 = sumSensor2/5;
 		//if the sensors are "enabled" we put the sum of values into result variable
-		if(sensor1 && sensor2){
+		if(sensorBool1 && sensorBool2){
 			result += sumSensor1;
 			result += sumSensor2;
 			result /=2;
-		}else if(!sensor1 && sensor2){
+		}else if(!sensorBool1 && sensorBool2){
 			result += sumSensor2;
-		}else if(sensor1 && !sensor2){
+		}else if(sensorBool1 && !sensorBool2){
 			result += sumSensor1;
-		}else if(!sensor1 && !sensor2){
+		}else if(!sensorBool1 && !sensorBool2){
 			throw new NoSensorInputException("No reliable data");
 		}
 
@@ -133,12 +115,12 @@ public class Car implements carInterface {
 	@Override
 	public void moveBackward() {
 		
-		if(!getPosition().isParked()){	//if the car is not parked at a certain position
+		if(!movementController.getPosition().isParked()){	//if the car is not parked at a certain position
 			
 		
-		if(position.getLocation() <=500 && position.getLocation()> 0){	//boundary check
+		if(movementController.getPosition().getLocation() <=500 && movementController.getPosition().getLocation()> 0){	//boundary check
 			try {
-				position.setLocation(position.getLocation()-1);	//it sets the location to N-1
+				movementController.getPosition().setLocation(movementController.getPosition().getLocation()-1);	//it sets the location to N-1
 			} catch (WrongInputException e) {			//try & catch method
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -150,19 +132,46 @@ public class Car implements carInterface {
 	//park implementation method
 	@Override
 	public void park() throws NoSensorInputException, WrongInputException {
-		while(getPosition().getCounter()<5){		//if the car detects less than 5 parking spaces
-			if(getPosition().getLocation()<500){	//during the track position
-				moveForward();						//it moves forward
+		
+		while(movementController.getPosition().getLocation()<500){		//if the car detects less than 5 parking spaces
+		//during the track position
+			moveForward();						//it moves forward
+		}
+		
+		ParkingSpot[] parkingSpots = new ParkingSpot[]{new ParkingSpot(0,0)};
+		int tmpSize=0;
+		int parkingSpotsPosition = 0;
+		
+		
+		for(int pos : movementController.getPosition().getCounter()){
+			if(pos==0){
+				if(tmpSize>=3){
+					parkingSpots[parkingSpotsPosition] = new ParkingSpot(tmpSize,pos-1);
+					parkingSpotsPosition++;
+				}
+				tmpSize = 0;
 			}else{
-				getPosition().setParked(false);		//spaces<5 therefore the car cannot park
-				break;
+				tmpSize++;
 			}
 		}
 		
-		// To-do
-		// Advanced parking maneuver
+		int max = 0;
+		ParkingSpot bestSpot = new ParkingSpot(0,0);
+		for(ParkingSpot spot : parkingSpots){
+			if(spot.getSize()>max){
+				bestSpot = spot;
+			}
+			
+		}
 		
-		getPosition().setParked(true);			//outside the while loop means the car has found
+		movementController.setBestSpot(bestSpot);
+		
+		
+		movementController.getPosition().setParked(true);
+		// To-do
+		// Advanced parking maneuver using bestPosition.
+		
+		//outside the while loop means the car has found
 	}											//a suitable place to park --> it parks;
 	
 	//unPark implementation - it sets the parked method to false and gets the position.
@@ -172,13 +181,31 @@ public class Car implements carInterface {
 		
 		//To-do
 		// Advanced unParking maneuver.
-		getPosition().setParked(false);
+		movementController.getPosition().setParked(false);
 	}
 	// whereIs method implementation - it returns the position of the car
 	//it uses the class Position
 	@Override
 	public Position whereIs() {
-		return getPosition();
+		return movementController.getPosition();
+	}
+	public UltrasonicSensor1 getSensor1() {
+		return sensor1;
+	}
+	public void setSensor1(UltrasonicSensor1 sensor1) {
+		this.sensor1 = sensor1;
+	}
+	public Ultrasonicsensor2 getSensor2() {
+		return sensor2;
+	}
+	public void setSensor2(Ultrasonicsensor2 sensor2) {
+		this.sensor2 = sensor2;
+	}
+	public MovementController getMovementController() {
+		return movementController;
+	}
+	public void setMovementController(MovementController movementController) {
+		this.movementController = movementController;
 	}
 
 	
