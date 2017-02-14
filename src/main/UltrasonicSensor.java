@@ -16,6 +16,7 @@ public class UltrasonicSensor implements UltrasonicSensorInterface{
 			
 		}
 		
+		
 		//ultrasonic sensor2 getter
 		public int[] getUltrasonicArray2(int pos) {
 			if(mockArr2[pos]==null){
