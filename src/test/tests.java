@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import main.Car;
 import main.NoSensorInputException;
+import main.ParkingSpot;
 import main.Position;
 import main.WrongInputException;
 public class tests {
@@ -68,8 +69,8 @@ public class tests {
 	public void testIsEmptyNoise() throws NoSensorInputException, WrongInputException{
 		int[] tmpArr1 = {40,10,50,20,1};
 		int[] tmpArr2 = {30,10,80,100,5};
-		testCar.getSensor1().setUltrasonicArray1(tmpArr1);
-		testCar.getSensor2().setUltrasonicArray2(tmpArr2);
+		testCar.getSensor().setUltrasonicArray1(tmpArr1);
+		testCar.getSensor().setUltrasonicArray2(tmpArr2);
 		testCar.isEmpty();
 	}
 	
@@ -78,8 +79,8 @@ public class tests {
 	public void testIsEmptyLowInput() throws WrongInputException, NoSensorInputException{
 		int[] tmpArr1 = {-1,-1,-1,-1,-1};
 		int[] tmpArr2 = {-1,-1,-1,-1,-1};
-		testCar.getSensor1().setUltrasonicArray1(tmpArr1);
-		testCar.getSensor2().setUltrasonicArray2(tmpArr2);
+		testCar.getSensor().setUltrasonicArray1(tmpArr1);
+		testCar.getSensor().setUltrasonicArray2(tmpArr2);
 		testCar.isEmpty();
 	}
 	
@@ -88,8 +89,8 @@ public class tests {
 	public void testIsEmptyHighInput() throws WrongInputException, NoSensorInputException{
 		int[] tmpArr1 = {201,201,201,201,201};
 		int[] tmpArr2 = {201,201,201,201,201};
-		testCar.getSensor1().setUltrasonicArray1(tmpArr1);
-		testCar.getSensor2().setUltrasonicArray2(tmpArr2);
+		testCar.getSensor().setUltrasonicArray1(tmpArr1);
+		testCar.getSensor().setUltrasonicArray2(tmpArr2);
 		testCar.isEmpty();
 	}
 	//Test for the correct input detected by the sensors
@@ -97,8 +98,8 @@ public class tests {
 	public void testIsEmptyCorrectInput() throws WrongInputException, NoSensorInputException {
 		int[] tmpArr1 = {100,95,97,101,100};
 		int[] tmpArr2 = {99,98,102,105,101};
-		testCar.getSensor1().setUltrasonicArray1(tmpArr1);
-		testCar.getSensor2().setUltrasonicArray2(tmpArr2);
+		testCar.getSensor().setUltrasonicArray1(tmpArr1);
+		testCar.getSensor().setUltrasonicArray2(tmpArr2);
 		assertEquals(99, testCar.isEmpty());
 		
 	}
@@ -209,7 +210,8 @@ public class tests {
 	@Test
 	public void testParkingSpaces() throws NoSensorInputException, WrongInputException{
 		testCar.park();
-		assertEquals(0,testCar.getMovementController().getBestSpot().getLocation());
+		ParkingSpot tmpPark  = new ParkingSpot(3,4);
+		assertEquals(tmpPark,testCar.getMovementController().getBestSpot());
 	}
 	
 }

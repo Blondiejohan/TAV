@@ -52,9 +52,10 @@ public interface carInterface {
 	              4. testMoveBackwardsHighInput(): Move backwards when position > 500
 	 
 	 * @return 
+	 * @throws WrongInputException 
 
 	*/
-	public void moveBackward();
+	public void moveBackward() throws WrongInputException;
 	
 	/**
 
