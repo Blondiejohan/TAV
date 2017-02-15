@@ -5,9 +5,6 @@ import org.mockito.*;
 
 public class Car implements carInterface {
 
-	
-	
-	
 	//position initialization
 	private UltrasonicSensor sensor;
 	private MovementController movementController;
@@ -21,7 +18,7 @@ public class Car implements carInterface {
 		
 		
 		//position is an object containing an integer location, a counter and a boolean parked
-		movementController = new MovementController(location,0,parked);
+		setMovementController(new MovementController(location,0,parked));
 		
 	}
 	
@@ -37,6 +34,7 @@ public class Car implements carInterface {
 		if(!movementController.getPosition().isParked()){
 		
 		//move forward
+			if(getMovementController().getPosition().getLocation() < 500 && getMovementController().getPosition().getLocation()>= 0){
 			movementController.accelerate();
 			
 			if(isEmpty()>100){ //it means that the spot is empty
@@ -48,7 +46,7 @@ public class Car implements carInterface {
 			}
 		}//if it detects spacing places it saves them in the counter
 		
-		
+		}
 		return movementController.getPosition();
 	}
 	//isEmpty implementation method
@@ -78,7 +76,7 @@ public class Car implements carInterface {
 		for(int i = 0;i<5;i++){			/*requirements implementation of 5 times filtering through averaging
 			data filtering: the sensor is "disabled" if the current value is less/greater 
 			than the last value +/- 10 */
-			if(sensor.getUltrasonicArray1(getMovementController().getPosition().getLocation())[i]+10 < lastValueSensor1 || sensor.getUltrasonicArray2(getMovementController().getPosition().getLocation())[i]-10 > lastValueSensor1){
+			if(sensor.getUltrasonicArray1(getMovementController().getPosition().getLocation())[i]+10 < lastValueSensor1 || sensor.getUltrasonicArray1(getMovementController().getPosition().getLocation())[i]-10 > lastValueSensor1){
 				sensorBool1 = false;	
 			}
 			//data filtering for ultrasonic sensor 2
