@@ -2,15 +2,15 @@ package main;
 
 public class UltrasonicSensor implements UltrasonicSensorInterface{
 	//ultrasonic sensor array where distance is stored
-	private int[] ultrasonicArray1;
+	private int[][] ultrasonicArray1;
 
 	//ultrasonic sensor array where distance is stored
-		private int[] ultrasonicArray2;
+		private int[][] ultrasonicArray2;
 
 		int[][] mockArr1=null;
 		int[][] mockArr2=null;
 
-		public UltrasonicSensor (int[] inputArray1, int[] inputArray2){
+		public UltrasonicSensor (int[][] inputArray1, int[][] inputArray2){
 			setUltrasonicArray1(inputArray1);
 			setUltrasonicArray2(inputArray2);
 			
@@ -19,14 +19,12 @@ public class UltrasonicSensor implements UltrasonicSensorInterface{
 		
 		//ultrasonic sensor2 getter
 		public int[] getUltrasonicArray2(int pos) {
-			if(mockArr2[pos]==null){
-				return new int[]{0,0,0,0,0};
-			}
-			return mockArr2[pos];
+			
+			return ultrasonicArray2[pos];
 		}
 
 		//ultrasonic sensor2 setter
-		public void setUltrasonicArray2(int[] ultrasonicArray2) {
+		public void setUltrasonicArray2(int[][] ultrasonicArray2) {
 			this.ultrasonicArray2 = ultrasonicArray2;
 		}
 		
@@ -57,15 +55,13 @@ public class UltrasonicSensor implements UltrasonicSensorInterface{
 	//ultrasonic sensor1 getter
 		//
 	public int[] getUltrasonicArray1(int pos) {
-		if(mockArr1[pos]==null){
-			return new int[]{0,0,0,0,0};
-		}
-		return mockArr1[pos];
+		
+		return ultrasonicArray1[pos];
 	}
 	//ultrasonic sensor1 setter
 		//
-	public void setUltrasonicArray1(int[] ultrasonicArray1) {
-		this.ultrasonicArray1 = ultrasonicArray1;
+	public void setUltrasonicArray1(int[][] inputArray1) {
+		this.ultrasonicArray1 = inputArray1;
 	}
 
 }

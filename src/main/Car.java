@@ -15,7 +15,7 @@ public class Car implements carInterface {
 	//constructor which initialize all needed objects
 	//the car object is needed as precondition to most of the test cases
 	
-	public Car(int location, boolean parked, int[] ultrasonicSensor1, int[] ultrasonicSensor2) throws WrongInputException{
+	public Car(int location, boolean parked, int[][] ultrasonicSensor1, int[][] ultrasonicSensor2) throws WrongInputException{
 		
 		setSensor(new UltrasonicSensor(ultrasonicSensor1,ultrasonicSensor2));
 		
@@ -40,7 +40,7 @@ public class Car implements carInterface {
 		//move forward
 			movementController.accelerate();
 			
-			if(isEmpty()>100){
+			if(isEmpty()>100){ //it means that the spot is empty
 				movementController.getPosition().setCounter(parkingSpot, 1);
 				parkingSpot++;
 			}else{
