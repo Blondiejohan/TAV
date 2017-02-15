@@ -53,7 +53,6 @@ public class tests {
 	}
 	
 	
-	
 	//Tests for isEmpty
 	
 	// This tests if the isEmpty method behaves correctly under normal circumstances.
