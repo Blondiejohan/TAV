@@ -25,8 +25,12 @@ public class tests {
 	// Tests for moveForward.
 	
 	@Test //when isEmpty returns a value >100
-	public void testMoveForwardMore(){
-		testCar.
+	public void testMoveForwardMore() throws NoSensorInputException, WrongInputException{
+		int[][] tmpArr1 = {{120,120,120,120,120},{120,120,120,120,120}};
+		testCar.getSensor().setUltrasonicArray1(tmpArr1);
+		testCar.getSensor().setUltrasonicArray2(tmpArr1);
+		testCar.moveForward();
+		assertEquals(1,testCar.getMovementController().getPosition().getCounter()[0]);
 	}
 	
 	// This tests the normal move forward to make sure the methods behaves correctly
