@@ -2,8 +2,11 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import main.Car;
 import main.NoSensorInputException;
@@ -15,7 +18,13 @@ public class tests {
 	
 	Car testCar;
 	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
+	
 	// here we set up a car with standard values that is used for each test.
+	
+	
 	@Before
 	public void setUp() throws WrongInputException{
 		int[] tmpArr3 = {1,1,1,1,1};
@@ -47,7 +56,7 @@ public class tests {
 		testCar.getSensor().setUltrasonicArray1(tmpArr1);
 		testCar.getSensor().setUltrasonicArray2(tmpArr1);
 		testCar.moveForward();
-		assertEquals(1,testCar.getMovementController().getPosition().getCounter()[1]);
+		assertEquals(1,testCar.getMovementController().getPosition().getCounter()[0]);
 
 	}
 	
@@ -74,6 +83,7 @@ public class tests {
 	public void testMoveForwardLowInput() throws WrongInputException, NoSensorInputException{
 		testCar.getMovementController().getPosition().setLocation(-5);
 		testCar.moveForward();
+	
 	}
 	
 	// This tests if the starting location when creating the car in a high incorrect value.
