@@ -87,25 +87,44 @@ public class tests {
 		testCar.isEmpty();
 	}
 	
-	// This tests if the sensors is giving bad input for negative number
+	// This tests if the sensors is giving bad input for negative number for sensor 1
 	@Test(expected=NoSensorInputException.class)
-	public void testIsEmptyLowInput() throws WrongInputException, NoSensorInputException{
+	public void testIsEmptyLowInput1() throws WrongInputException, NoSensorInputException{
 		int[][] tmpArr1 = {{-1,-1,-1,-1,-1}};
+		int[][] tmpArr2 = {{40,10,50,20,1}};
+		testCar.getSensor().setUltrasonicArray1(tmpArr1);
+		testCar.getSensor().setUltrasonicArray2(tmpArr2);
+		testCar.isEmpty();
+	}
+	// This tests if the sensors is giving bad input for negative number for sensor 2
+	@Test(expected=NoSensorInputException.class)
+	public void testIsEmptyLowInput2() throws WrongInputException, NoSensorInputException{
+		int[][] tmpArr1 = {{40,10,50,20,1}};
 		int[][] tmpArr2 = {{-1,-1,-1,-1,-1}};
 		testCar.getSensor().setUltrasonicArray1(tmpArr1);
 		testCar.getSensor().setUltrasonicArray2(tmpArr2);
 		testCar.isEmpty();
 	}
 	
-	// This tests if the sensors is giving bad input for number above 200
+	// This tests if the sensor1 is giving bad input for number above 200
 	@Test(expected=NoSensorInputException.class)
-	public void testIsEmptyHighInput() throws WrongInputException, NoSensorInputException{
+	public void testIsEmptyHighInput1() throws WrongInputException, NoSensorInputException{
 		int[][] tmpArr1 = {{201,201,201,201,201}};
-		int[][] tmpArr2 = {{201,201,201,201,201}};
+		int[][] tmpArr2 = {{40,10,50,20,1}};
 		testCar.getSensor().setUltrasonicArray1(tmpArr1);
 		testCar.getSensor().setUltrasonicArray2(tmpArr2);
 		testCar.isEmpty();
 	}
+	
+	// This tests if the sensor2 is giving bad input for number above 200
+		@Test(expected=NoSensorInputException.class)
+		public void testIsEmptyHighInput2() throws WrongInputException, NoSensorInputException{
+			int[][] tmpArr1 = {{40,10,50,20,1}};
+			int[][] tmpArr2 = {{201,201,201,201,201}};
+			testCar.getSensor().setUltrasonicArray1(tmpArr1);
+			testCar.getSensor().setUltrasonicArray2(tmpArr2);
+			testCar.isEmpty();
+		}
 	//Test for the correct input detected by the sensors
 	@Test
 	public void testIsEmptyCorrectInput() throws WrongInputException, NoSensorInputException {
