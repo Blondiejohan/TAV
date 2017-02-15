@@ -33,7 +33,6 @@ public class tests {
 	
 	
 	@Test //when isEmpty returns a value >100
-
 	public void testMoveForwardLess() throws NoSensorInputException, WrongInputException{
 		int[][] tmpArr1 = {{1,1,1,1,1},{1,1,1,1,1}};
 		testCar.getSensor().setUltrasonicArray1(tmpArr1);
@@ -42,6 +41,7 @@ public class tests {
 		assertEquals(0,testCar.getMovementController().getPosition().getCounter()[0]);
 	}
 
+	@Test
 	public void testMoveForwardMore() throws NoSensorInputException, WrongInputException{
 		int[][] tmpArr1 = {{120,120,120,120,120},{120,120,120,120,120}};
 		testCar.getSensor().setUltrasonicArray1(tmpArr1);
@@ -93,6 +93,29 @@ public class tests {
 		int distance = testCar.isEmpty();
 		assertEquals(1,distance);
 	}
+	
+	@Test
+	public void testIsEmptyNr1Broken() throws WrongInputException, NoSensorInputException{
+		int[] tmpArr = {9,30,70,20,80};
+		int[][] returnArr = testCar.getSensor().getUltrasonicArray1();
+		returnArr[0] = tmpArr;
+		returnArr[1] = tmpArr;
+		returnArr[2] = tmpArr;
+		testCar.getSensor().setUltrasonicArray1(returnArr);
+		assertEquals(1,testCar.isEmpty());
+	}
+	
+	@Test
+	public void testIsEmptyNr2Broken() throws WrongInputException, NoSensorInputException{
+		int[] tmpArr = {1,30,70,20,80};
+		int[][] returnArr = testCar.getSensor().getUltrasonicArray2();
+		returnArr[0] = tmpArr;
+		returnArr[1] = tmpArr;
+		returnArr[2] = tmpArr;
+		testCar.getSensor().setUltrasonicArray2(returnArr);
+		assertEquals(1,testCar.isEmpty());
+	}
+	
 	
 	
 	// This tests if the sensors are giving non consistent values

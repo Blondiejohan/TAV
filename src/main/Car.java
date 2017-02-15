@@ -35,8 +35,7 @@ public class Car implements carInterface {
 		
 		//if the car is not parked
 		if(!movementController.getPosition().isParked()){
-		//if the car is within the ranges
-		if(movementController.getPosition().getLocation() < 500 && movementController.getPosition().getLocation()>= 0){
+		
 		//move forward
 			movementController.accelerate();
 			
@@ -49,7 +48,7 @@ public class Car implements carInterface {
 			}
 		}//if it detects spacing places it saves them in the counter
 		
-		}
+		
 		return movementController.getPosition();
 	}
 	//isEmpty implementation method
@@ -107,7 +106,6 @@ public class Car implements carInterface {
 		}else if(!sensorBool1 && !sensorBool2){
 			throw new NoSensorInputException("No reliable data");
 		}
-
 		return result;
 	}
 	//implementation of moveBackward method

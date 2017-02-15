@@ -13,8 +13,10 @@ public class MovementController implements MovementControllerInterface {
 
 	@Override
 	public void accelerate() throws WrongInputException {
+		//if the car is within the ranges
+				if(getPosition().getLocation() < 500 && getPosition().getLocation()>= 0){
 		position.setLocation(position.getLocation()+1);
-		
+				}
 		
 	}
 
