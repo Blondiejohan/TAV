@@ -58,6 +58,17 @@ public class UltrasonicSensor implements UltrasonicSensorInterface{
 		
 		return ultrasonicArray1[pos];
 	}
+	
+public int[][] getUltrasonicArray1() {
+		
+		return ultrasonicArray1;
+	}
+
+public int[][] getUltrasonicArray2() {
+	
+	return ultrasonicArray2;
+}
+
 	//ultrasonic sensor1 setter
 		//
 	public void setUltrasonicArray1(int[][] inputArray1) {

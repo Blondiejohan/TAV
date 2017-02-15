@@ -2,8 +2,11 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import main.Car;
 import main.NoSensorInputException;
@@ -15,7 +18,13 @@ public class tests {
 	
 	Car testCar;
 	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
+	
 	// here we set up a car with standard values that is used for each test.
+	
+	
 	@Before
 	public void setUp() throws WrongInputException{
 		int[] tmpArr3 = {1,1,1,1,1};
@@ -33,7 +42,6 @@ public class tests {
 	
 	
 	@Test //when isEmpty returns a value >100
-
 	public void testMoveForwardLess() throws NoSensorInputException, WrongInputException{
 		int[][] tmpArr1 = {{1,1,1,1,1},{1,1,1,1,1}};
 		testCar.getSensor().setUltrasonicArray1(tmpArr1);
@@ -42,6 +50,7 @@ public class tests {
 		assertEquals(0,testCar.getMovementController().getPosition().getCounter()[0]);
 	}
 
+	@Test
 	public void testMoveForwardMore() throws NoSensorInputException, WrongInputException{
 		int[][] tmpArr1 = {{120,120,120,120,120},{120,120,120,120,120}};
 		testCar.getSensor().setUltrasonicArray1(tmpArr1);
@@ -74,6 +83,7 @@ public class tests {
 	public void testMoveForwardLowInput() throws WrongInputException, NoSensorInputException{
 		testCar.getMovementController().getPosition().setLocation(-5);
 		testCar.moveForward();
+	
 	}
 	
 	// This tests if the starting location when creating the car in a high incorrect value.
@@ -92,6 +102,29 @@ public class tests {
 		int distance = testCar.isEmpty();
 		assertEquals(1,distance);
 	}
+	
+	@Test
+	public void testIsEmptyNr1Broken() throws WrongInputException, NoSensorInputException{
+		int[] tmpArr = {9,30,70,20,80};
+		int[][] returnArr = testCar.getSensor().getUltrasonicArray1();
+		returnArr[0] = tmpArr;
+		returnArr[1] = tmpArr;
+		returnArr[2] = tmpArr;
+		testCar.getSensor().setUltrasonicArray1(returnArr);
+		assertEquals(1,testCar.isEmpty());
+	}
+	
+	@Test
+	public void testIsEmptyNr2Broken() throws WrongInputException, NoSensorInputException{
+		int[] tmpArr = {1,30,70,20,80};
+		int[][] returnArr = testCar.getSensor().getUltrasonicArray2();
+		returnArr[0] = tmpArr;
+		returnArr[1] = tmpArr;
+		returnArr[2] = tmpArr;
+		testCar.getSensor().setUltrasonicArray2(returnArr);
+		assertEquals(1,testCar.isEmpty());
+	}
+	
 	
 	
 	// This tests if the sensors are giving non consistent values
@@ -213,6 +246,7 @@ public class tests {
 		testCar.moveBackward();
 		assertEquals(1,testCar.getMovementController().getPosition().getLocation());
 	}
+	
 	
 	
 	//Tests for unPark

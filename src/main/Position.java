@@ -8,9 +8,9 @@ public class Position {
 	private boolean parked;
 	
 //Position object constructor.
-	public Position(int roadLocation, int i, boolean parked) throws WrongInputException{
+	public Position(int roadLocation, boolean parked) throws WrongInputException{
 		setLocation(roadLocation);
-		spaceCounter = new int[]{0};
+		spaceCounter = new int[501];
 		
 	}
 

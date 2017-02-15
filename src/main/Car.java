@@ -5,9 +5,6 @@ import org.mockito.*;
 
 public class Car implements carInterface {
 
-	
-	
-	
 	//position initialization
 	private UltrasonicSensor sensor;
 	private MovementController movementController;
@@ -21,7 +18,7 @@ public class Car implements carInterface {
 		
 		
 		//position is an object containing an integer location, a counter and a boolean parked
-		movementController = new MovementController(location,0,parked);
+		setMovementController(new MovementController(location,0,parked));
 		
 	}
 	
@@ -35,9 +32,9 @@ public class Car implements carInterface {
 		
 		//if the car is not parked
 		if(!movementController.getPosition().isParked()){
-		//if the car is within the ranges
-		if(movementController.getPosition().getLocation() < 500 && movementController.getPosition().getLocation()>= 0){
+		
 		//move forward
+			if(getMovementController().getPosition().getLocation() < 500 && getMovementController().getPosition().getLocation()>= 0){
 			movementController.accelerate();
 			
 			if(isEmpty()>100){ //it means that the spot is empty
@@ -79,7 +76,7 @@ public class Car implements carInterface {
 		for(int i = 0;i<5;i++){			/*requirements implementation of 5 times filtering through averaging
 			data filtering: the sensor is "disabled" if the current value is less/greater 
 			than the last value +/- 10 */
-			if(sensor.getUltrasonicArray1(getMovementController().getPosition().getLocation())[i]+10 < lastValueSensor1 || sensor.getUltrasonicArray2(getMovementController().getPosition().getLocation())[i]-10 > lastValueSensor1){
+			if(sensor.getUltrasonicArray1(getMovementController().getPosition().getLocation())[i]+10 < lastValueSensor1 || sensor.getUltrasonicArray1(getMovementController().getPosition().getLocation())[i]-10 > lastValueSensor1){
 				sensorBool1 = false;	
 			}
 			//data filtering for ultrasonic sensor 2
@@ -107,7 +104,6 @@ public class Car implements carInterface {
 		}else if(!sensorBool1 && !sensorBool2){
 			throw new NoSensorInputException("No reliable data");
 		}
-
 		return result;
 	}
 	//implementation of moveBackward method
