@@ -47,7 +47,7 @@ public class tests {
 		testCar.getSensor().setUltrasonicArray1(tmpArr1);
 		testCar.getSensor().setUltrasonicArray2(tmpArr1);
 		testCar.moveForward();
-		assertEquals(1,testCar.getMovementController().getPosition().getCounter()[0]);
+		assertEquals(1,testCar.getMovementController().getPosition().getCounter()[1]);
 
 	}
 	
@@ -237,6 +237,7 @@ public class tests {
 		testCar.moveBackward();
 		assertEquals(1,testCar.getMovementController().getPosition().getLocation());
 	}
+	
 	
 	
 	//Tests for unPark
