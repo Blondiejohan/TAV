@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import main.Car;
 import main.NoSensorInputException;
+import main.ParkingSpot;
 //import main.ParkingSpot;
 import main.Position;
 import main.WrongInputException;
@@ -17,16 +18,27 @@ public class tests {
 	// here we set up a car with standard values that is used for each test.
 	@Before
 	public void setUp() throws WrongInputException{
-		int[][] tmpArr1 = {{1,1,1,1,1}};
-		int[][] tmpArr2 = {{1,1,1,1,1}};
+		int[] tmpArr3 = {1,1,1,1,1};
+		int[][] tmpArr1 = new int[501][5];
+		int[][] tmpArr2 = new int[501][5];
+		for(int i = 0 ; i<500 ; i++){
+			tmpArr1[i] = tmpArr3;
+			tmpArr2[i] = tmpArr3;
+		}
+		
 		testCar = new Car(0,false,tmpArr1,tmpArr2);
 	}
 	
 	// Tests for moveForward.
 	
+	
 	@Test //when isEmpty returns a value >100
-	public void testMoveForwardMore(){
-		testCar.
+	public void testMoveForwardLess() throws NoSensorInputException, WrongInputException{
+		int[][] tmpArr1 = {{1,1,1,1,1},{1,1,1,1,1}};
+		testCar.getSensor().setUltrasonicArray1(tmpArr1);
+		testCar.getSensor().setUltrasonicArray2(tmpArr1);
+		testCar.moveForward();
+		assertEquals(0,testCar.getMovementController().getPosition().getCounter()[0]);
 	}
 	
 	// This tests the normal move forward to make sure the methods behaves correctly
@@ -149,13 +161,13 @@ public class tests {
 	
 	
 	// This tests if the method parks correctly during normal run
-//	@Test
-//	public void testPark() throws WrongInputException, NoSensorInputException{
-//		testCar.getMovementController().getPosition().setLocation(5);
-//		testCar.getMovementController().getPosition().setCounter(5);
-//		testCar.park();
-//		assertTrue(testCar.getMovementController().getPosition().isParked());
-//	}
+	@Test
+	public void testPark() throws WrongInputException, NoSensorInputException{
+		testCar.getMovementController().getPosition().setLocation(1);
+		testCar.getMovementController().setBestSpot(new ParkingSpot(3,5));
+		testCar.park();
+		assertTrue(testCar.getMovementController().getPosition().isParked());
+	}
 	
 	// This tests if the car can move forward while it is parked
 	@Test
