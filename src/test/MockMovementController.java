@@ -35,7 +35,7 @@ public class MockMovementController implements MovementControllerInterface {
     
     @Before
     public void create() throws WrongInputException{
-    	//Position position1 = new Position(0,0,false);
+    	Position position1 = new Position(0,0,false);
     	int[] tmpArr3 = {1,1,1,1,1};
 		int[][] tmpArr1 = new int[501][5];
 		int[][] tmpArr2 = new int[501][5];
@@ -47,8 +47,7 @@ public class MockMovementController implements MovementControllerInterface {
 		//move.setLocation(0);
     	move = mock(MovementControllerInterface.class); //create MoveController mock object
     	
-    	when(move.accelerate()).thenReturn();
-    	
+    	//verify
     }
 
     @Test
