@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,13 +17,14 @@ import main.MovementControllerInterface;
 import main.NoSensorInputException;
 import main.ParkingSpot;
 import main.Position;
+import main.UltrasonicSensor;
 import main.WrongInputException;
 
 @RunWith (MockitoJUnitRunner.class)
 public class MockMovementController implements MovementControllerInterface {
 	
-	
-	Position move;
+	@Mock
+	Position startingPoint;
 	
 	@Mock
 	Position position;
@@ -33,8 +35,14 @@ public class MockMovementController implements MovementControllerInterface {
 	@Mock
     Car testCar;
 	
+	@Mock
+	UltrasonicSensor mockSensor;
+	
+	@Mock
+	MovementControllerInterface actuator;
+	
     @Before
-    public void setUp() throws WrongInputException{
+    public void setUp() throws WrongInputException, NoSensorInputException{
     	initMocks(this);
     	int[] tmpArr3 = {1,1,1,1,1};
 		int[][] tmpArr1 = new int[501][5];
@@ -47,30 +55,54 @@ public class MockMovementController implements MovementControllerInterface {
 		testCar = new Car(0,false,tmpArr1, tmpArr2);
 		position = new Position(0,false);
 		bestSpot = new ParkingSpot(0,0);
+		mockSensor = new UltrasonicSensor(tmpArr1,tmpArr2);
 		
-    	move = mock(Position.class); //create MoveController mock object
-    	when(move.getLocation()).thenReturn(0);
+		//1. Car starts at the beggining of the street - DONE
+    	startingPoint = mock(Position.class); //create Position mock object
+    	when(startingPoint.getLocation()).thenReturn(0); //car is in position 0
     	
-    	//when
-    	//verify
-    	System.out.println(position.getLocation());
+    	//2. Car moves forward - JUST TESTING PURPOSES
+    	for (int i=0; i<500; i++){
+    		testCar = mock(Car.class);
+    	when(testCar.moveForward()).thenReturn(getPosition());
+    	}
+    	
+    	//bestSpot = mock(ParkingSpot.class); //create bestSpot mock object
+    	//when(bestSpot.getSize()).thenReturn(3);
+    	//when(bestSpot.getSize()).thenReturn(5);
+    
     }
+    
+    @After
+	public void tearDown() throws Exception {
+	}
 
     private void initMocks(MockMovementController mockMovementController) throws WrongInputException {
     	//mockMovementController.accelerate();
-    	mockMovementController.position.getLocation();
-		// TODO Auto-generated method stub
+    	mockMovementController.startingPoint.equals(0);
+    	//mockMovementController.bestSpot.getSize();
 		
 	}
 
 	@Test
     public void testMovementForward() throws WrongInputException{
-       
-		assertSame(move.getLocation(),0);
-        //verify(move).;
-        verify(move, times(5)).getLocation();
+		
+		//test if car is on the starting point - DONE
+		assertSame(startingPoint.getLocation(),0);
+		
+		//test if car moves forward from 0 to 500
+		for (int i=0; i<500; ++i){
+		assertEquals(i, testCar.getMovementController().getPosition().getLocation());
+		
+		}
+		verify(testCar, times(500)).equals(500);
+		
+		//assertEquals(bestSpot.getSize(),i);
+        //verify(startingPoint, times(1)).getLocation();
+        //verify(bestSpot, times(1)).getSize();
     }
     
+	
     
    	@Override
    	public void accelerate() throws WrongInputException{
