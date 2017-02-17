@@ -27,15 +27,9 @@ public class tests {
 	
 	@Before
 	public void setUp() throws WrongInputException{
-		int[] tmpArr3 = {1,1,1,1,1};
-		int[][] tmpArr1 = new int[501][5];
-		int[][] tmpArr2 = new int[501][5];
-		for(int i = 0 ; i<500 ; i++){
-			tmpArr1[i] = tmpArr3;
-			tmpArr2[i] = tmpArr3;
-		}
 		
-		testCar = new Car(0,false,tmpArr1,tmpArr2);
+		
+		testCar = new Car(0,false);
 	}
 	
 	// Tests for moveForward.
@@ -50,6 +44,7 @@ public class tests {
 		assertEquals(0,testCar.getMovementController().getPosition().getCounter()[0]);
 	}
 
+	// This tests moving forward when there is a free spot open.
 	@Test
 	public void testMoveForwardMore() throws NoSensorInputException, WrongInputException{
 		int[][] tmpArr1 = {{120,120,120,120,120},{120,120,120,120,120}};
@@ -94,7 +89,6 @@ public class tests {
 	}
 	
 	
-	
 	//Tests for isEmpty
 	
 	// This tests if the isEmpty method behaves correctly under normal circumstances.
@@ -104,6 +98,7 @@ public class tests {
 		assertEquals(1,distance);
 	}
 	
+	// This tests if isempty works as intended when one sensor is giving bad values
 	@Test
 	public void testIsEmptyNr1Broken() throws WrongInputException, NoSensorInputException{
 		int[] tmpArr = {9,30,70,20,80};
@@ -115,6 +110,8 @@ public class tests {
 		assertEquals(1,testCar.isEmpty());
 	}
 	
+	// This tests if isempty works as intended when the other sensor sensor is giving bad values
+
 	@Test
 	public void testIsEmptyNr2Broken() throws WrongInputException, NoSensorInputException{
 		int[] tmpArr = {1,30,70,20,80};
@@ -275,12 +272,6 @@ public class tests {
 		assertTrue(position.getLocation()>=0 && position.getLocation()<=500);
 	}
 	
-	// Tests if current value of parkingCounter is a legal one
-//		@Test
-//		public void testWhereIsParkingCounter(){
-//			Position position = testCar.whereIs();
-//			assertTrue(position.getCounter()>=0 && position.getCounter()<=5);
-//		}
 	
 	// Tests if position is not null
 	@Test
@@ -288,13 +279,6 @@ public class tests {
 		Position position = testCar.whereIs();
 		assertNotNull(position);
 	}
-	
-//	@Test
-//	public void testParkingSpaces() throws NoSensorInputException, WrongInputException{
-//		testCar.park();
-//		ParkingSpot tmpPark  = new ParkingSpot(3,4);
-//		assertEquals(tmpPark,testCar.getMovementController().getBestSpot());
-//	}
 	
 }
 

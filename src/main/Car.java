@@ -12,9 +12,19 @@ public class Car implements carInterface {
 	//constructor which initialize all needed objects
 	//the car object is needed as precondition to most of the test cases
 	
-	public Car(int location, boolean parked, int[][] ultrasonicSensor1, int[][] ultrasonicSensor2) throws WrongInputException{
+	public Car(int location, boolean parked) throws WrongInputException{
 		
-		setSensor(new UltrasonicSensor(ultrasonicSensor1,ultrasonicSensor2));
+		// Creates preset standard values for the sensor.
+		
+		int[] tmpArr3 = {1,1,1,1,1};
+		int[][] tmpArr1 = new int[501][5];
+		int[][] tmpArr2 = new int[501][5];
+		for(int i = 0 ; i<500 ; i++){
+			tmpArr1[i] = tmpArr3;
+			tmpArr2[i] = tmpArr3;
+		}
+		
+		setSensor(new UltrasonicSensor(tmpArr1,tmpArr2));
 		
 		
 		//position is an object containing an integer location, a counter and a boolean parked
@@ -129,6 +139,9 @@ public class Car implements carInterface {
 			moveForward(); //it moves forward500
 		}
 		
+		// Create a parking spot and checks the array of open spots to find the actual parking spots and then find the optimal parking spot
+		// then save it to the variable bestSpot.
+		
 		ParkingSpot[] parkingSpots = new ParkingSpot[]{new ParkingSpot(0,0)};
 		int tmpSize=0;
 		int parkingSpotsPosition = 0;
@@ -159,11 +172,13 @@ public class Car implements carInterface {
 		
 		
 		movementController.getPosition().setParked(true);
-		// To-do
-		// Advanced parking maneuver using bestPosition.
 		
-		//outside the while loop means the car has found
-	}											//a suitable place to park --> it parks;
+		
+		ParkingSpot bestSpotPark = movementController.getBestSpot();
+		// To-do
+		// Advanced parking maneuver in the parking spot bestSpotPark
+		
+	}
 	
 	//unPark implementation - it sets the parked method to false and gets the position.
 	//used for the unPark test method.

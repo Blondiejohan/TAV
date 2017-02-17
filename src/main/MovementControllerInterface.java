@@ -12,12 +12,13 @@ public interface MovementControllerInterface {
 	  Post-condition:  the car has moved one meter forward.
 	  
 	  Test-cases: 
-	 * @throws WrongInputException 
+	
+	 
 	 
 	
 
 	*/
-	public void accelerate () throws WrongInputException;
+	public void accelerate () throws WrongInputException, NoSensorInputException;
 	
 	
 	/**
@@ -29,10 +30,11 @@ public interface MovementControllerInterface {
 	  Post-condition: the car has moved one meter bakwards.
 	  
 	  Test-cases: 
-	 * @throws WrongInputException 
+	  
+	
 	 
 	
 
 	*/
-	public void reverse() throws WrongInputException;
+	public void reverse() throws WrongInputException, NoSensorInputException;
 }
