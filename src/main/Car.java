@@ -159,11 +159,13 @@ public class Car implements carInterface {
 		
 		
 		movementController.getPosition().setParked(true);
-		// To-do
-		// Advanced parking maneuver using bestPosition.
 		
-		//outside the while loop means the car has found
-	}											//a suitable place to park --> it parks;
+		
+		ParkingSpot bestSpotPark = movementController.getBestSpot();
+		// To-do
+		// Advanced parking maneuver in the parking spot bestSpotPark
+		
+	}
 	
 	//unPark implementation - it sets the parked method to false and gets the position.
 	//used for the unPark test method.
