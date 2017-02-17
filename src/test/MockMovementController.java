@@ -64,8 +64,12 @@ public class MockMovementController implements MovementControllerInterface {
     	//2. Car moves forward - JUST TESTING PURPOSES
     	for (int i=0; i<500; i++){
     		testCar = mock(Car.class);
+    		position = mock(Position.class);
     	when(testCar.moveForward()).thenReturn(getPosition());
+    	when(position.getLocation()).thenReturn(i);
+    	System.out.println(position.getLocation());
     	}
+    	
     	
     	//bestSpot = mock(ParkingSpot.class); //create bestSpot mock object
     	//when(bestSpot.getSize()).thenReturn(3);
@@ -77,9 +81,10 @@ public class MockMovementController implements MovementControllerInterface {
 	public void tearDown() throws Exception {
 	}
 
-    private void initMocks(MockMovementController mockMovementController) throws WrongInputException {
+    private void initMocks(MockMovementController mockMovementController) throws WrongInputException, NoSensorInputException {
     	//mockMovementController.accelerate();
-    	mockMovementController.startingPoint.equals(0);
+    	//mockMovementController.startingPoint.equals(0);
+    	
     	//mockMovementController.bestSpot.getSize();
 		
 	}
@@ -91,11 +96,11 @@ public class MockMovementController implements MovementControllerInterface {
 		assertSame(startingPoint.getLocation(),0);
 		
 		//test if car moves forward from 0 to 500
-		for (int i=0; i<500; ++i){
-		assertEquals(i, testCar.getMovementController().getPosition().getLocation());
-		
+		for (int i=0; i<500; i++){
+		assertEquals(i, position.getLocation());
+		//verify(position, times(500)).equals(i);
 		}
-		verify(testCar, times(500)).equals(500);
+		
 		
 		//assertEquals(bestSpot.getSize(),i);
         //verify(startingPoint, times(1)).getLocation();
