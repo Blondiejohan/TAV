@@ -18,6 +18,7 @@ import main.NoSensorInputException;
 import main.ParkingSpot;
 import main.Position;
 import main.UltrasonicSensor;
+import main.UltrasonicSensorInterface;
 import main.WrongInputException;
 import main.carInterface;
 
@@ -26,6 +27,9 @@ public class MockNormalPark {
 	
 	
     Car testCar;
+    
+    @Mock
+    UltrasonicSensorInterface sensor;
 	
 	
     @Before
@@ -38,39 +42,45 @@ public class MockNormalPark {
     }
 		@Test
 		public void testNormalPark() throws WrongInputException, NoSensorInputException{
-		testCar = mock(carInterface.class);
+		sensor = mock(UltrasonicSensorInterface.class);
 		
 		for (int i=0; i<500; i++){
 			
 			//at location 0 the parking is not available
-			if(i > 0 && i < 15){
-				when(testCar.isEmpty()).thenReturn(120);
+			if(i >= 0 && i < 15){
+				when(sensor.isEmpty()).thenReturn(20);
 				}
 			else if(i > 15 &&  i < 18){
-				when(testCar.isEmpty()).thenReturn(20);
+				when(sensor.isEmpty()).thenReturn(120);
 				}
 			else if(i > 18 && i < 40){
-				when(testCar.isEmpty()).thenReturn(120);
+				when(sensor.isEmpty()).thenReturn(20);
 				}
 			else if(i > 40 && i < 44){
-				when(testCar.isEmpty()).thenReturn(20);
+				when(sensor.isEmpty()).thenReturn(120);
 				}
 			else if(i > 44 && i < 80 ){
-				when(testCar.isEmpty()).thenReturn(120);
+				when(sensor.isEmpty()).thenReturn(20);
 			}
 			else if(i > 80 && i<85){
-				when(testCar.isEmpty()).thenReturn(20);
+				when(sensor.isEmpty()).thenReturn(120);
 			}
 			else if(i > 85 && i < 500){
-				when(testCar.isEmpty()).thenReturn(120);
+				when(sensor.isEmpty()).thenReturn(20);
 			}
+			//System.out.println(testCar.getMovementController().getPosition().getLocation());
+			//System.out.println(sensor.isEmpty());
+			//System.out.println();
+
 			testCar.moveForward();
 			
 		}
 	
-		int bestSpot = testCar.getMovementController().getBestSpot().getLocation();
+		testCar.park();
 		
-		for(int i = 500 ; i <bestSpot ; i--){
+		ParkingSpot bestSpot = testCar.getMovementController().getBestSpot();
+		
+		for(int i = 500 ; i <bestSpot.getLocation() ; i--){
 			testCar.moveBackward();
 		}		
 	//preform advanced parking

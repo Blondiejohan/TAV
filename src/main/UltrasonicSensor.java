@@ -75,4 +75,11 @@ public int[][] getUltrasonicArray2() {
 		this.ultrasonicArray1 = inputArray1;
 	}
 
+
+	@Override
+	public int isEmpty() throws WrongInputException, NoSensorInputException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

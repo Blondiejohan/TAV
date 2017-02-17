@@ -3,7 +3,7 @@ import org.mockito.*;
 
 //implementation of the car class
 
-public class Car implements carInterface {
+public class Car implements carInterface, UltrasonicSensorInterface {
 
 	//position initialization
 	private UltrasonicSensor sensor;
@@ -45,8 +45,8 @@ public class Car implements carInterface {
 		//move forward
 			if(getMovementController().getPosition().getLocation() <= 500 && getMovementController().getPosition().getLocation()>= 0){
 			movementController.accelerate();
-			
-			if(isEmpty()>100){ //it means that the spot is empty
+			int result = isEmpty();
+			if(result>100){ //it means that the spot is empty
 				movementController.getPosition().setCounter(parkingSpot, 1);
 				parkingSpot++;
 			}else{
@@ -133,10 +133,10 @@ public class Car implements carInterface {
 	//park implementation method
 	@Override
 	public void park() throws NoSensorInputException, WrongInputException {
-		while(movementController.getPosition().getLocation()<500){		//if the car detects less than 5 parking spaces
+		//while(movementController.getPosition().getLocation()<500){		//if the car detects less than 5 parking spaces
 		//during the track position
-			moveForward(); //it moves forward500
-		}
+			//moveForward(); //it moves forward500
+		//}
 		
 		// Create a parking spot and checks the array of open spots to find the actual parking spots and then find the optimal parking spot
 		// then save it to the variable bestSpot.
