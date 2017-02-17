@@ -7,8 +7,9 @@ public class MovementController implements MovementControllerInterface {
 
 
 	
-	public MovementController(int location, int i, boolean parked) throws WrongInputException {
+	public MovementController(int location, boolean parked) throws WrongInputException {
 		setPosition(new Position(location,parked));
+		setBestSpot(new ParkingSpot(0,0));
 	}
 
 	@Override

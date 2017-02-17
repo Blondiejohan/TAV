@@ -20,7 +20,7 @@ public class Position {
 	//check boundaries
 	public void setLocation(int location) throws WrongInputException {
 		//if we are not within the track limits
-		if(location<0 || location>500){
+		if(location< 0 || location>500){
 			throw new WrongInputException("Input is wrong");
 		}else{
 			this.location=location;

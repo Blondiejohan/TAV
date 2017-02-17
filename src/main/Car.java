@@ -15,7 +15,6 @@ public class Car implements carInterface {
 	public Car(int location, boolean parked) throws WrongInputException{
 		
 		// Creates preset standard values for the sensor.
-		
 		int[] tmpArr3 = {1,1,1,1,1};
 		int[][] tmpArr1 = new int[501][5];
 		int[][] tmpArr2 = new int[501][5];
@@ -28,7 +27,7 @@ public class Car implements carInterface {
 		
 		
 		//position is an object containing an integer location, a counter and a boolean parked
-		setMovementController(new MovementController(location,0,parked));
+		setMovementController(new MovementController(location,parked));
 		
 	}
 	
@@ -44,7 +43,7 @@ public class Car implements carInterface {
 		if(!movementController.getPosition().isParked()){
 		
 		//move forward
-			if(getMovementController().getPosition().getLocation() < 500 && getMovementController().getPosition().getLocation()>= 0){
+			if(getMovementController().getPosition().getLocation() <= 500 && getMovementController().getPosition().getLocation()>= 0){
 			movementController.accelerate();
 			
 			if(isEmpty()>100){ //it means that the spot is empty

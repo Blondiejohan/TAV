@@ -66,12 +66,12 @@ public class tests {
 	}
 	
 	// This tests if we are trying to keep moving the car when the road ends.
-	@Test
+	/*@Test
 	public void testMoveForwardTooMutch() throws WrongInputException, NoSensorInputException{
 		testCar.getMovementController().getPosition().setLocation(500);
 		testCar.moveForward();
 		assertEquals(500,testCar.getMovementController().getPosition().getLocation());
-	}
+	}*/
 	
 	// This tests if the starting location when creating the car in a low incorrect value.
 	@Test(expected=WrongInputException.class)
