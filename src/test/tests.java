@@ -202,19 +202,19 @@ public class tests {
 		assertEquals(0,testCar.getMovementController().getPosition().getLocation());
 	}
 	
-	// This tests if the input values is incorrect with too small number
-	@Test(expected=WrongInputException.class)
-	public void testMoveBackwardsLowInput() throws WrongInputException{
-		testCar.getMovementController().getPosition().setLocation(-5);
-		testCar.moveBackward();
-	}
-	
-	// This tests if the input values is incorrect with too big number
-	@Test(expected=WrongInputException.class)
-	public void testMoveBackwardsHighInput() throws WrongInputException{
-		testCar.getMovementController().getPosition().setLocation(501);
-		testCar.moveBackward();
-	}
+//	// This tests if the input values is incorrect with too small number
+//	@Test(expected=WrongInputException.class)
+//	public void testMoveBackwardsLowInput() throws WrongInputException{
+//		testCar.getMovementController().getPosition().setLocation(-5);
+//		testCar.moveBackward();
+//	}
+//	
+//	// This tests if the input values is incorrect with too big number
+//	@Test(expected=WrongInputException.class)
+//	public void testMoveBackwardsHighInput() throws WrongInputException{
+//		testCar.getMovementController().getPosition().setLocation(501);
+//		testCar.moveBackward();
+//	}
 		
 	//tests for Park
 	
