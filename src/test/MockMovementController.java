@@ -44,18 +44,12 @@ public class MockMovementController implements MovementControllerInterface {
     @Before
     public void setUp() throws WrongInputException, NoSensorInputException{
     	initMocks(this);
-    	int[] tmpArr3 = {1,1,1,1,1};
-		int[][] tmpArr1 = new int[501][5];
-		int[][] tmpArr2 = new int[501][5];
-		for(int i = 0 ; i<500 ; i++){
-			tmpArr1[i] = tmpArr3;
-			tmpArr2[i] = tmpArr3;
-		}
-		
-		testCar = new Car(0,false,tmpArr1, tmpArr2);
+		testCar = new Car(0,false);
 		position = new Position(0,false);
 		bestSpot = new ParkingSpot(0,0);
-		mockSensor = new UltrasonicSensor(tmpArr1,tmpArr2);
+		
+		//mockSensor = new UltrasonicSensor(tmpArr1,tmpArr2);  // This already have a sensor, if you mock the car you can just use Car.setSensor when you have created
+		// a new one.
 		
 		//1. Car starts at the beggining of the street - DONE
     	startingPoint = mock(Position.class); //create Position mock object
