@@ -19,7 +19,27 @@ public interface carInterface {
 	
 
 	*/
-	public Position moveForward() throws NoSensorInputException, WrongInputException;
+	
+public int isEmpty() throws WrongInputException, NoSensorInputException;
+	
+	/**
+
+	  The method moves the car one meter back
+	  
+	  Pre-condition: The car has to be within defined ranges
+
+	  Post-condition: The car has moved one meter back
+	  
+	  Test-cases: 1. testMoveBackward(): Move backwards when position>0 && position<500
+	              2. testMoveBackwardTooMutch(): Move backwards when position = 0
+	              3. testMoveBackwardsLowInput(): Move backwards when position < 0
+	              4. testMoveBackwardsHighInput(): Move backwards when position > 500
+	 
+	 * @return 
+	 * @throws WrongInputException 
+
+	*/
+	public int moveForward() throws NoSensorInputException, WrongInputException;
 	
 	/**
 
@@ -84,6 +104,6 @@ public interface carInterface {
 	 * @return 
 
 	*/
-	public Position whereIs();
+	public int whereIs();
 	
 }
