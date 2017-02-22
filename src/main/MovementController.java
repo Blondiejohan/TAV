@@ -13,7 +13,7 @@ public class MovementController implements MovementControllerInterface {
 	@Override
 	public void accelerate() throws WrongInputException {
 		//if the car is within the ranges
-				//System.out.println("set location");
+		//System.out.println("set location");
 		setLocation(getLocation()+1);
 	}
 
@@ -39,8 +39,6 @@ public class MovementController implements MovementControllerInterface {
 			this.location=location;
 		}
 	}
-
-	
 
 	public boolean isParked() {
 		return this.parked;
