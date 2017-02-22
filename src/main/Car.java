@@ -50,8 +50,8 @@ public class Car implements carInterface {
 		if(!movementController.isParked()){
 		
 		//move forward
-			if(getMovementController().getLocation() <= 500 && getMovementController().getLocation()>= 0){
-			
+			if(movementController.getLocation() <= 500 && movementController.getLocation()>= 0){
+			System.out.println(movementController.getLocation());
 			movementController.accelerate();
 			int result = isEmpty();
 			

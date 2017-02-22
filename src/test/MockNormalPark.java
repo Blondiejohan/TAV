@@ -37,10 +37,10 @@ public class MockNormalPark {
 		public void testParking() throws WrongInputException, NoSensorInputException{
 		sensor1 = mock(UltrasonicSensor.class);
 		sensor2 = mock(UltrasonicSensor.class);
-		//movement = mock(MovementController.class);
+		movement = mock(MovementController.class);
 		testCar.setSensor1(sensor1);
 		testCar.setSensor2(sensor2);
-		//testCar.setMovementController(movement);
+		testCar.setMovementController(movement);
 		
 		
 
@@ -49,9 +49,9 @@ public class MockNormalPark {
 		currentPosition=0;
 		
 		
-		//when(movement.getPosition().getLocation()).thenReturn(currentPosition);
-		//when(movement.isParked()).thenReturn(parked);
-		//when(movement.getLocation()).thenReturn(currentPosition);
+		when(movement.getLocation()).thenReturn(currentPosition);
+		when(movement.isParked()).thenReturn(parked);
+		
 		
 
 		
@@ -66,9 +66,12 @@ public class MockNormalPark {
 		while (currentPosition<500){
 			
 			//System.out.println(currentPosition);
-			testCar.moveForward();
+			
 			currentPosition++;
-			int test=testCar.getMovementController().getLocation();
+			testCar.moveForward();
+			//testCar.getMovementController().setLocation(currentPosition);
+			//System.out.print(testCar.getMovementController().getLocation()+" ");
+			//int test=testCar.getMovementController().getLocation();
 		
 			
 			//at location 0 the parking is not available
