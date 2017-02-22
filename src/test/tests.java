@@ -12,7 +12,6 @@ import main.Car;
 import main.NoSensorInputException;
 import main.ParkingSpot;
 //import main.ParkingSpot;
-import main.Position;
 import main.WrongInputException;
 public class tests {
 	
@@ -24,8 +23,6 @@ public class tests {
 	
 	@Before
 	public void setUp() throws WrongInputException{
-		
-		
 		testCar = new Car(0,false);
 	}
 	
