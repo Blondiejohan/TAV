@@ -64,9 +64,10 @@ public class MockNormalPark {
 		while (currentPosition<500){
 			
 			//System.out.println(currentPosition);
-			
+			System.out.println("before");
 			currentPosition++;
 			testCar.moveForward();
+			System.out.println("after");
 			//testCar.getMovementController().setLocation(currentPosition);
 			//System.out.print(testCar.getMovementController().getLocation()+" ");
 			//int test=testCar.getMovementController().getLocation();
