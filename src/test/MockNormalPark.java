@@ -111,8 +111,6 @@ public class MockNormalPark {
 			
 		}
 		
-
-		
 		testCar.park();
 		//when(movement.getBestSpot()).thenReturn(new ParkingSpot(60,3));
 		ParkingSpot bestSpot = testCar.getBestSpot();
@@ -124,48 +122,7 @@ public class MockNormalPark {
 		assertEquals(testCar.whereIs(),testCar.getMovementController().getLocation());
 		assertTrue(movement.isParked());
 		
-	//perform advanced parking
-		
 		}
-		
-		
-//		@Test(expected=NoSensorInputException.class)
-//		public void testUnparkingWithBadsensors() throws WrongInputException, NoSensorInputException{
-//		
-//			
-//			sensor1 = mock(UltrasonicSensor.class);
-//			sensor2 = mock(UltrasonicSensor.class);
-//			//movement = mock(MovementController.class);
-//			testCar.setSensor1(sensor1);
-//			testCar.setSensor2(sensor2);
-//			//testCar.setMovementController(movement);
-//			
-//			
-//			
-//			int[] tmp1 = {20,20,20,20,20};
-//			int[] tmp2 = {120,120,120,120,120};
-//			int[] badSensor1 = {1,38,183,45,135};
-//			
-//			
-//			testCar.unPark();
-//			
-//			
-//			when(sensor1.getUltrasonicArray()).thenReturn(tmp1);
-//			when(sensor2.getUltrasonicArray()).thenReturn(tmp1);
-//			
-//			while (currentPosition<500){
-//				
-//				//System.out.println(currentPosition);
-//				testCar.moveForward();
-//				currentPosition++;
-//				
-//				if(currentPosition >= 0 && currentPosition <= 15){
-//					//when(sensor.isEmpty()).thenReturn(20);
-//					when(sensor1.getUltrasonicArray()).thenReturn(badSensor1);
-//					when(sensor2.getUltrasonicArray()).thenReturn(badSensor1);
-//				}	
-//			}	
-//		}
 		
 		
 }

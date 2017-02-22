@@ -7,7 +7,6 @@ import org.junit.Test;
 import main.Car;
 import main.MovementController;
 import main.NoSensorInputException;
-import main.ParkingSpot;
 import main.UltrasonicSensor;
 import main.WrongInputException;
 //@RunWith (MockitoJUnitRunner.class)
