@@ -52,10 +52,10 @@ public class Car implements carInterface {
 		//move forward
 			if(movementController.getLocation() <= 500 && movementController.getLocation()>= 0){
 			System.out.println(movementController.getLocation());
-			movementController.accelerate();
+			movementController.setLocation(movementController.getLocation()+1);
+			
+			
 			int result = isEmpty();
-			
-			
 			if(result>100){ //it means that the spot is empty
 				int[] tmp = getCounter();
 				
