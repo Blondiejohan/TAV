@@ -10,18 +10,19 @@ public class ParkingSpot {
 		this.setSize(size);
 	}
 
+	// getting the location
 	public int getLocation() {
 		return location;
 	}
-
+	// setting the location
 	public void setLocation(int location) {
 		this.location = location;
 	}
-
+	// getting the size of the parking spot
 	public int getSize() {
 		return size;
 	}
-
+	// setting the size of the parking spot
 	public void setSize(int size) {
 		this.size = size;
 	}

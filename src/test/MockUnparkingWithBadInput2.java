@@ -31,17 +31,17 @@ public class MockUnparkingWithBadInput2 {
 	public void testUnparkingWithBadinput2() throws WrongInputException, NoSensorInputException{
 	
 		
-		sensor1 = mock(UltrasonicSensor.class);
+		sensor1 = mock(UltrasonicSensor.class); // mocking of the sensors
 		sensor2 = mock(UltrasonicSensor.class);
 		//movement = mock(MovementController.class);
-		testCar.setSensor1(sensor1);
+		testCar.setSensor1(sensor1); // setting the mocked sensor values to testCar
 		testCar.setSensor2(sensor2);
 		//testCar.setMovementController(movement);
 		
 		
 		
 		int[] tmp1 = {20,20,20,20,20};
-		int[] badSensor = {-5,-5,-5,-5,-5};
+		int[] badSensor = {-5,-5,-5,-5,-5}; // negative sensor values
 		
 		testCar.unPark();
 		
@@ -49,6 +49,8 @@ public class MockUnparkingWithBadInput2 {
 		when(sensor1.getUltrasonicArray()).thenReturn(tmp1);
 		when(sensor2.getUltrasonicArray()).thenReturn(tmp1);
 		
+		// while the position is less than 500, move forward
+		// with negative sensor values and crash
 		while (currentPosition<500){
 			
 			//System.out.println(currentPosition);

@@ -26,23 +26,25 @@ public class MockUnparkingWithBadInput {
 	    public void setUp() throws WrongInputException, NoSensorInputException{
 			testCar = new Car(0,false);	
 	    }
-
+	  
+	// This test scenario unparks the car 
+	// and then returns too high sensor values making the car crash
 	@Test(expected=NoSensorInputException.class)
 	public void testUnparkingWithBadinput() throws WrongInputException, NoSensorInputException{
 		
-		sensor1 = mock(UltrasonicSensor.class);
+		sensor1 = mock(UltrasonicSensor.class); // mocking of sensors
 		sensor2 = mock(UltrasonicSensor.class);
 		//movement = mock(MovementController.class);
-		testCar.setSensor1(sensor1);
+		testCar.setSensor1(sensor1); // setting mocked sensors to testCar
 		testCar.setSensor2(sensor2);
 		//testCar.setMovementController(movement);
 		
 		
 		
 		int[] tmp1 = {20,20,20,20,20};
-		int[] badSensor = {999,999,999,999,999};
+		int[] badSensor = {999,999,999,999,999}; // too high sensor values
 		
-		testCar.unPark();
+		testCar.unPark(); // unparks
 		
 		
 		when(sensor1.getUltrasonicArray()).thenReturn(tmp1);
