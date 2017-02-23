@@ -12,6 +12,7 @@ public class Car implements carInterface {
 	private ParkingSpot bestSpot;
 	private int[] parkingSpots;
 	private int iterate=0;
+	private int location;
 	//constructor which initialize all needed objects
 	//the car object is needed as precondition to most of the test cases
 	
@@ -22,8 +23,9 @@ public class Car implements carInterface {
 		
 		setSensor1(new UltrasonicSensor());
 		setSensor2(new UltrasonicSensor());
+		this.location = location;
 		//position is an object containing an integer location, a counter and a boolean parked
-		setMovementController(new MovementController(location,parked));
+		setMovementController(new MovementController(parked));
 		setCounter(new int[501]);
 		
 	}
@@ -46,14 +48,18 @@ public class Car implements carInterface {
 	@Override
 	public int moveForward() throws NoSensorInputException, WrongInputException {
 		
+		
 		//if the car is not parked
 		if(!movementController.isParked()){
-		
-		//move forward
-			if(movementController.getLocation() <= 500 && movementController.getLocation()>= 0){
-			System.out.println(movementController.getLocation());
-			movementController.setLocation(movementController.getLocation()+1);
 			
+		//move forward
+			if(location < 500 && location>= 0){
+			
+				
+			if(movementController.accelerate(location)){
+				location++;
+			};
+			System.out.println(location);
 			
 			int result = isEmpty();
 			if(result>100){ //it means that the spot is empty
@@ -72,16 +78,16 @@ public class Car implements carInterface {
 				setCounter(tmp);
 				
 				
+			
+			
 			}
-			
-			
 			
 			
 		}//if it detects spacing places it saves them in the counter
 		
 		}
 		
-		return getMovementController().getLocation();
+		return getLocation();
 	}
 	//isEmpty implementation method
 	//used for isEmpty test cases
@@ -158,8 +164,12 @@ public class Car implements carInterface {
 	public void moveBackward() throws WrongInputException {
 		if(!getMovementController().isParked()){	//if the car is not parked at a certain position
 			//System.out.println(movementController.getLocation());
-		if(movementController.getLocation() <=500 && movementController.getLocation()> 0){	//boundary check
-			movementController.reverse();	//it sets the location to N-1
+		if(getLocation() <=500 && getLocation()> 0){	//boundary check
+			System.out.println(location);
+			if(movementController.reverse(location)){
+				location--;
+			}
+				//it sets the location to N-1
 			} 
 		}
 	}
@@ -234,7 +244,7 @@ public class Car implements carInterface {
 	//it uses the class Position
 	@Override
 	public int whereIs() {
-		return movementController.getLocation();
+		return getLocation();
 	}
 	
 	public MovementController getMovementController() {
@@ -263,6 +273,20 @@ public class Car implements carInterface {
 		this.parkingSpots=i;
 	}
 	
-	
+	public int getLocation() {
+		//System.out.println("getlocation()");
+		return this.location;
+		
+	}
+	//check boundaries
+	public void setLocation(int location) throws WrongInputException {
+		//if we are not within the track limits
+		if(location < 0 || location > 500){
+			throw new WrongInputException("Input is wrong");
+		}else{
+			
+			this.location=location;
+		}
+	}
 	
 }

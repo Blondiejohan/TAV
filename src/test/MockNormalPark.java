@@ -14,7 +14,6 @@ import main.WrongInputException;
 //@RunWith (MockitoJUnitRunner.class)
 public class MockNormalPark {
 	
-	
     Car testCar;
     
    UltrasonicSensor sensor1;
@@ -23,10 +22,10 @@ public class MockNormalPark {
     
    MovementController movement;
   
-  int currentPosition;
+  int currentPosition=0;
+  
+  
    
-	
-	
     @Before
     public void setUp() throws WrongInputException, NoSensorInputException{
 		testCar = new Car(0,false);
@@ -44,14 +43,13 @@ public class MockNormalPark {
 
 		boolean parked = false;
 		
-		currentPosition=0;
+	
+	
 		
-		
-		when(movement.getLocation()).thenReturn(currentPosition);
 		when(movement.isParked()).thenReturn(parked);
+		when(movement.accelerate(anyInt())).thenReturn(true);
 		
-		
-
+		when(movement.reverse(anyInt())).thenReturn(true);
 		
 		int[] tmp1 = {20,20,20,20,20};
 		int[] tmp2 = {120,120,120,120,120};
@@ -63,14 +61,9 @@ public class MockNormalPark {
 		
 		while (currentPosition<500){
 			
-			//System.out.println(currentPosition);
-			System.out.println("before");
-			currentPosition++;
+			currentPosition = testCar.getLocation();
 			testCar.moveForward();
-			System.out.println("after");
-			//testCar.getMovementController().setLocation(currentPosition);
-			//System.out.print(testCar.getMovementController().getLocation()+" ");
-			//int test=testCar.getMovementController().getLocation();
+			
 		
 			
 			//at location 0 the parking is not available
@@ -122,51 +115,11 @@ public class MockNormalPark {
 		
 		when(movement.isParked()).thenReturn(true);
 		
-		assertEquals(testCar.whereIs(),testCar.getMovementController().getLocation());
+		assertEquals(testCar.whereIs(),testCar.getLocation());
 		assertTrue(movement.isParked());
 		
 	//perform advanced parking
 		
 		}
-		
-		
-//		@Test(expected=NoSensorInputException.class)
-//		public void testUnparkingWithBadsensors() throws WrongInputException, NoSensorInputException{
-//		
-//			
-//			sensor1 = mock(UltrasonicSensor.class);
-//			sensor2 = mock(UltrasonicSensor.class);
-//			//movement = mock(MovementController.class);
-//			testCar.setSensor1(sensor1);
-//			testCar.setSensor2(sensor2);
-//			//testCar.setMovementController(movement);
-//			
-//			
-//			
-//			int[] tmp1 = {20,20,20,20,20};
-//			int[] tmp2 = {120,120,120,120,120};
-//			int[] badSensor1 = {1,38,183,45,135};
-//			
-//			
-//			testCar.unPark();
-//			
-//			
-//			when(sensor1.getUltrasonicArray()).thenReturn(tmp1);
-//			when(sensor2.getUltrasonicArray()).thenReturn(tmp1);
-//			
-//			while (currentPosition<500){
-//				
-//				//System.out.println(currentPosition);
-//				testCar.moveForward();
-//				currentPosition++;
-//				
-//				if(currentPosition >= 0 && currentPosition <= 15){
-//					//when(sensor.isEmpty()).thenReturn(20);
-//					when(sensor1.getUltrasonicArray()).thenReturn(badSensor1);
-//					when(sensor2.getUltrasonicArray()).thenReturn(badSensor1);
-//				}	
-//			}	
-//		}
-		
 		
 }

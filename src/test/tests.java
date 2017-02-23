@@ -58,14 +58,14 @@ public class tests {
 		testCar.getSensor1().setUltrasonicArray(tmpArr1);
 		testCar.getSensor2().setUltrasonicArray(tmpArr1);
 		testCar.moveForward();
-		assertEquals(1,testCar.getMovementController().getLocation());
+		assertEquals(1,testCar.getLocation());
 	}
 	
 	
 	// This tests if the starting location when creating the car in a low incorrect value.
 	@Test(expected=WrongInputException.class)
 	public void testMoveForwardLowInput() throws WrongInputException, NoSensorInputException{
-		testCar.getMovementController().setLocation(-5);
+		testCar.setLocation(-5);
 		testCar.moveForward();
 	
 	}
@@ -73,7 +73,7 @@ public class tests {
 	// This tests if the starting location when creating the car in a high incorrect value.
 	@Test(expected=WrongInputException.class)
 	public void testMoveForwardHighInput() throws WrongInputException, NoSensorInputException{
-		testCar.getMovementController().setLocation(501);
+		testCar.setLocation(501);
 		testCar.moveForward();
 	}
 	
@@ -174,32 +174,32 @@ int[] tmpArr = {9,30,70,20,80};
 	// This tests if the method move backward behaves correctly under normal run.
 	@Test
 	public void testMoveBackward() throws WrongInputException{
-		testCar.getMovementController().setLocation(5);
+		testCar.setLocation(5);
 		testCar.moveBackward();
-		assertEquals(4,testCar.getMovementController().getLocation());
+		assertEquals(4,testCar.getLocation());
 	}
 	
 	// This tests that the car cant move backwards when there is no street
 	@Test
 	public void testMoveBackwardTooMutch() throws WrongInputException{
-		testCar.getMovementController().setLocation(0);
+		testCar.setLocation(0);
 		testCar.moveBackward();
-		assertEquals(0,testCar.getMovementController().getLocation());
+		assertEquals(0,testCar.getLocation());
 	}
 	
-//	// This tests if the input values is incorrect with too small number
-//	@Test(expected=WrongInputException.class)
-//	public void testMoveBackwardsLowInput() throws WrongInputException{
-//		testCar.getMovementController().getPosition().setLocation(-5);
-//		testCar.moveBackward();
-//	}
-//	
-//	// This tests if the input values is incorrect with too big number
-//	@Test(expected=WrongInputException.class)
-//	public void testMoveBackwardsHighInput() throws WrongInputException{
-//		testCar.getMovementController().getPosition().setLocation(501);
-//		testCar.moveBackward();
-//	}
+	// This tests if the input values is incorrect with too small number
+	@Test(expected=WrongInputException.class)
+	public void testMoveBackwardsLowInput() throws WrongInputException{
+		testCar.setLocation(-5);
+		testCar.moveBackward();
+	}
+	
+	// This tests if the input values is incorrect with too big number
+	@Test(expected=WrongInputException.class)
+	public void testMoveBackwardsHighInput() throws WrongInputException{
+		testCar.setLocation(501);
+		testCar.moveBackward();
+	}
 		
 	//tests for Park
 	
@@ -207,7 +207,7 @@ int[] tmpArr = {9,30,70,20,80};
 	// This tests if the method parks correctly during normal run
 	@Test
 	public void testPark() throws WrongInputException, NoSensorInputException{
-		testCar.getMovementController().setLocation(1);
+		testCar.setLocation(1);
 		testCar.setBestSpot(new ParkingSpot(3,5));
 		testCar.park();
 		assertTrue(testCar.getMovementController().isParked());
@@ -218,16 +218,16 @@ int[] tmpArr = {9,30,70,20,80};
 	public void testParkMoveForward() throws WrongInputException, NoSensorInputException{
 		testCar.getMovementController().setParked(true);
 		testCar.moveForward();
-		assertEquals(0,testCar.getMovementController().getLocation());
+		assertEquals(0,testCar.getLocation());
 	}
 	
 	// This tests if the car can move backward while it is parked
 	@Test
 	public void testParkMoveBackward() throws WrongInputException{
-		testCar.getMovementController().setLocation(1);
+		testCar.setLocation(1);
 		testCar.getMovementController().setParked(true);
 		testCar.moveBackward();
-		assertEquals(1,testCar.getMovementController().getLocation());
+		assertEquals(1,testCar.getLocation());
 	}
 	
 	
@@ -244,7 +244,7 @@ int[] tmpArr = {9,30,70,20,80};
 	// This tests if the method fails when out of position
 		@Test(expected=WrongInputException.class)
 		public void testUnParkOutOfPosition() throws WrongInputException{
-			testCar.getMovementController().setLocation(-5);
+			testCar.setLocation(-5);
 			testCar.unPark();
 		}
 	

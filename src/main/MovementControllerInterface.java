@@ -20,7 +20,7 @@ public interface MovementControllerInterface {
 	
 
 	*/
-	public void accelerate () throws WrongInputException ;
+	boolean accelerate(int location) throws WrongInputException;
 	
 	
 	/**
@@ -40,22 +40,25 @@ public interface MovementControllerInterface {
 	
 
 	*/
-	public void reverse() throws WrongInputException;
+	boolean reverse(int location) throws WrongInputException;
 	
 	
 
 
 
 
-	public int getLocation();
-	//check boundaries
-	public void setLocation(int location) throws WrongInputException;
-
+	
 	
 
 	public boolean isParked() ;
 
 	public void setParked(boolean parked);
+
+
+	
+
+
+	
 
 	
 }

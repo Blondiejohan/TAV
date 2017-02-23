@@ -2,43 +2,37 @@ package main;
 
 public class MovementController implements MovementControllerInterface {
 
-	private int location;
 	private boolean parked;
 	
-	public MovementController(int loc, boolean park) throws WrongInputException {
-		this.location=loc;
+	public MovementController(boolean park) throws WrongInputException {
+		
 		this.parked=park;
 	}
 
 	@Override
-	public void accelerate() throws WrongInputException {
+	public boolean accelerate(int location) throws WrongInputException {
 		//if the car is within the ranges
-		//System.out.println("set location");
-		setLocation(getLocation()+1);
+		if(location < 500 && location>= 0){
+		//move car
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 
 	@Override
-	public void reverse() throws WrongInputException {
-		setLocation(getLocation()-1);
-		
+	public boolean reverse(int location) throws WrongInputException {
+		if(location < 500 && location>= 0){
+			//move car
+				return true;
+			}else{
+				return false;
+			}
 	}
 
 
-	public int getLocation() {
-		System.out.println("getlocation()");
-		return this.location;
-		
-	}
-	//check boundaries
-	public void setLocation(int location) throws WrongInputException {
-		//if we are not within the track limits
-		if(location < 0 || location > 500){
-			throw new WrongInputException("Input is wrong");
-		}else{
-			System.out.println("Setlocation()");
-			this.location=location;
-		}
-	}
+	
 
 	public boolean isParked() {
 		return this.parked;
@@ -47,5 +41,7 @@ public class MovementController implements MovementControllerInterface {
 	public void setParked(boolean parked) {
 		this.parked = parked;
 	}
+
+	
 
 }
